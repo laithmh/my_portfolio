@@ -314,7 +314,9 @@ const App = () => {
         </div>
       </section>
 
-      <motion.div
+     <section id="skills" className="py-20 px-4">
+  <div className="max-w-6xl mx-auto">
+    <motion.div
   variants={containerVariants}
   initial="hidden"
   whileInView="visible"
@@ -333,6 +335,8 @@ const App = () => {
     </motion.div>
   ))}
 </motion.div>
+  </div>
+</section>
 
 
       {/* Projects Section */}
