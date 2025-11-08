@@ -4,7 +4,9 @@ import {
   Mail, Github, Linkedin, Code,
   Smartphone, Palette,
   ChevronDown, ExternalLink,
-  Download
+  Download,
+  FacebookIcon,
+  Instagram
 } from 'lucide-react';
 import RiveAnimation from './components/RiveAnimation'
 // Animation variants
@@ -42,6 +44,16 @@ const floatAnimation = {
   }
 };
 
+// Handle resume download
+  const handleDownloadResume = () => {
+    // Create a temporary anchor element
+    const link = document.createElement('a');
+    link.href = '/resume.pdf'; // Place your resume in public folder
+    link.download = 'Laith_Mohammed_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
 
@@ -88,7 +100,24 @@ const App = () => {
     { name: "Responsive Design", icon: <Smartphone size={24} /> }
   ];
 
-
+const socialLinks = [
+    { 
+      icon: <Github size={28} />, 
+      label: "GitHub", 
+      url: "https://github.com/laithmh" // UPDATE THIS
+    },
+    { 
+      icon: <FacebookIcon size={28} />, 
+      label: "Facebook", 
+      url: "https://www.facebook.com/laithmh.54" // UPDATE THIS
+    },
+     { 
+      icon: <Instagram size={28} />, 
+      label: "instagram", 
+      url: "https://www.instagram.com/laithmohammad30?utm_source=qr&igsh=cmltajg2enFxZjE2" // UPDATE THIS
+    },
+   
+  ];
   // Handle scroll events for active section
   useEffect(() => {
     const handleScroll = () => {
@@ -159,8 +188,11 @@ const App = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleDownloadResume}
             className="bg-[#e0e5ec] px-4 py-2 rounded-xl shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] hover:shadow-[inset_3px_3px_8px_#a3b1c6,inset_-3px_-3px_8px_#ffffff] transition-all"
           >
+         
+              
             Resume
           </motion.button>
         </div>
@@ -292,11 +324,7 @@ const App = () => {
               >
                 <h3 className="text-2xl font-bold mb-4 text-[#1a3a5f]">Let's Connect</h3>
                 <div className="flex space-x-4">
-                  {[
-                    { icon: <Github size={28} />, label: "GitHub" },
-                    { icon: <Linkedin size={28} />, label: "LinkedIn" },
-                    { icon: <Mail size={28} />, label: "Email" }
-                  ].map((social, index) => (
+                  {socialLinks.map((social, index) => (
                     <motion.button
                       key={index}
                       whileHover={{ y: -5 }}
@@ -421,65 +449,61 @@ const App = () => {
           </motion.div>
         </div>
       </section>
+{/* Contact Section */}
+<section id="contact" className="py-20 px-4 bg-gradient-to-br from-[#d1d8e0] to-[#e0e5ec]">
+  <div className="max-w-4xl mx-auto text-center">
+    <motion.h2
+      className="text-4xl font-bold mb-6 text-[#1a3a5f]"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Let's Create Together
+    </motion.h2>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-gradient-to-br from-[#d1d8e0] to-[#e0e5ec]">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-6 text-[#1a3a5f]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Let's Create Together
-          </motion.h2>
+    <motion.p
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.2 }}
+      className="text-xl text-[#5d7d9e] mb-12 max-w-2xl mx-auto"
+    >
+      Have a project in mind? I'm always open to discussing new opportunities and creative collaborations.
+    </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-[#5d7d9e] mb-12 max-w-2xl mx-auto"
-          >
-            Have a project in mind? I'm always open to discussing new opportunities and creative collaborations.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="bg-[#e0e5ec] rounded-2xl shadow-[10px_10px_30px_#a3b1c6,-10px_-10px_30px_#ffffff] p-8 max-w-lg mx-auto"
-          >
-            <div className="space-y-4 mb-6">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full bg-white py-3 px-4 rounded-xl shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] focus:outline-none focus:ring-2 focus:ring-[#1a3a5f] transition-all"
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full bg-white py-3 px-4 rounded-xl shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] focus:outline-none focus:ring-2 focus:ring-[#1a3a5f] transition-all"
-              />
-              <textarea
-                placeholder="Your Message"
-                rows="4"
-                className="w-full bg-white py-3 px-4 rounded-xl shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] focus:outline-none focus:ring-2 focus:ring-[#1a3a5f] transition-all"
-              ></textarea>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-[#e0e5ec] py-4 rounded-xl font-medium text-lg shadow-[5px_5px_15px_#a3b1c6,-5px_-5px_15px_#ffffff] hover:shadow-[inset_5px_5px_15px_#a3b1c6,inset_-5px_-5px_15px_#ffffff] transition-all"
-            >
-              Send Message
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
-
+    {/* Email Link Section */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.4 }}
+      className="bg-[#e0e5ec] rounded-2xl shadow-[10px_10px_30px_#a3b1c6,-10px_-10px_30px_#ffffff] p-8 max-w-lg mx-auto"
+    >
+      <div className="mb-8">
+        <p className="text-lg text-[#5d7d9e] mb-2">Feel free to reach out directly:</p>
+        <motion.a
+          
+          // whileHover={{ scale: 1.05, y: -3 }}
+          // whileTap={{ scale: 0.95 }}
+          className="inline-block text-2xl font-bold text-[#1a3a5f] hover:text-[#1a3a5f]/80 transition-colors"
+        >
+          laithmhwork@gmail.com {/* REPLACE WITH YOUR EMAIL */}
+        </motion.a>
+      </div>
+      
+      {/* Optional: Keep the form or replace it completely */}
+      <motion.button
+      href="mailto:laithmhwork@gmail.com" // REPLACE WITH YOUR EMAIL
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.98 }}
+        className="w-full bg-[#1a3a5f] text-white py-4 rounded-xl font-medium text-lg shadow-[5px_5px_15px_#0a2a4f,-5px_-5px_15px_#2a4a6f] hover:shadow-[inset_5px_5px_15px_#0a2a4f,inset_-5px_-5px_15px_#2a4a6f] transition-all"
+      >
+        <Mail className="inline-block mr-2" size={20} />
+        Send Email
+      </motion.button>
+    </motion.div>
+  </div>
+</section>
       {/* Footer */}
       <footer className="py-12 px-4 text-center text-[#5d7d9e]">
         <div className="max-w-4xl mx-auto">
@@ -499,15 +523,19 @@ const App = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {['GitHub', 'LinkedIn', 'Twitter', 'Dribbble'].map((social, index) => (
-              <motion.button
+            {socialLinks.map((social, index) => (
+              <motion.a
                 key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={itemVariants}
                 whileHover={{ y: -3 }}
-                className="p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] hover:shadow-[inset_3px_3px_8px_#a3b1c6,inset_-3px_-3px_8px_#ffffff] transition-all"
+                className="p-3 rounded-xl bg-[#e0e5ec] text-[#1a3a5f] hover:text-[#1a3a5f]/80 shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] hover:shadow-[inset_3px_3px_8px_#a3b1c6,inset_-3px_-3px_8px_#ffffff] transition-all"
+                aria-label={social.label}
               >
-                {social}
-              </motion.button>
+                {social.icon}
+              </motion.a>
             ))}
           </motion.div>
 
