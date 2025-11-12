@@ -48,7 +48,7 @@ const floatAnimation = {
   const handleDownloadResume = () => {
     // Create a temporary anchor element
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // Place your resume in public folder
+    link.href = '/resume.pdf'; 
     link.download = 'Laith_Mohammed_Resume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -487,20 +487,12 @@ const socialLinks = [
           // whileTap={{ scale: 0.95 }}
           className="inline-block text-2xl font-bold text-[#1a3a5f] hover:text-[#1a3a5f]/80 transition-colors"
         >
-          laithmhwork@gmail.com {/* REPLACE WITH YOUR EMAIL */}
+          laithmhwork@gmail.com 
         </motion.a>
       </div>
       
-      {/* Optional: Keep the form or replace it completely */}
-      <motion.button
-      href="mailto:laithmhwork@gmail.com" // REPLACE WITH YOUR EMAIL
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.98 }}
-        className="w-full bg-[#1a3a5f] text-white py-4 rounded-xl font-medium text-lg shadow-[5px_5px_15px_#0a2a4f,-5px_-5px_15px_#2a4a6f] hover:shadow-[inset_5px_5px_15px_#0a2a4f,inset_-5px_-5px_15px_#2a4a6f] transition-all"
-      >
-        <Mail className="inline-block mr-2" size={20} />
-        Send Email
-      </motion.button>
+      
+     
     </motion.div>
   </div>
 </section>
