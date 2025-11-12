@@ -324,17 +324,28 @@ const socialLinks = [
               >
                 <h3 className="text-2xl font-bold mb-4 text-[#1a3a5f]">Let's Connect</h3>
                 <div className="flex space-x-4">
-                  {socialLinks.map((social, index) => (
-                    <motion.button
-                      key={index}
-                      whileHover={{ y: -5 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex flex-col items-center text-[#5d7d9e] hover:text-[#1a3a5f] transition-colors"
-                    >
-                      {social.icon}
-                      <span className="text-sm mt-1">{social.label}</span>
-                    </motion.button>
-                  ))}
+                  <motion.div
+            className="flex justify-center space-x-6 mb-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={itemVariants}
+                whileHover={{ y: -3 }}
+                className="p-3 rounded-xl bg-[#e0e5ec] text-[#1a3a5f] hover:text-[#1a3a5f]/80 shadow-[3px_3px_8px_#a3b1c6,-3px_-3px_8px_#ffffff] hover:shadow-[inset_3px_3px_8px_#a3b1c6,inset_-3px_-3px_8px_#ffffff] transition-all"
+                aria-label={social.label}
+              >
+                {social.icon}
+              </motion.a>
+            ))}
+          </motion.div>
                 </div>
               </motion.div>
             </div>
