@@ -145,3 +145,66 @@ export const DualDeviceMockup = ({
   );
 };
 
+/**
+ * Dual Phone Mockup (Side-by-Side Dark & Light Mode)
+ * Tailored for displaying dual mobile themes (e.g. Dark Neumorphic & Light Neumorphic).
+ */
+export const DualPhoneMockup = ({
+  darkContent,
+  lightContent,
+  darkLabel = "Dark Mode • 60 FPS Visualizer",
+  lightLabel = "Light Mode • Neumorphic",
+  className = ""
+}) => {
+  return (
+    <div className={`relative w-full max-w-2xl mx-auto flex items-center justify-center gap-3 sm:gap-6 py-2 select-none ${className}`}>
+      {/* Phone 1: Dark Mode Phone */}
+      <div className="flex-1 max-w-[190px] sm:max-w-[240px] flex flex-col items-center group transition-transform duration-300 hover:scale-[1.02] hover:z-20">
+        <div className="mb-2 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-gray-900/80 dark:bg-black/70 text-gray-300 border border-gray-700/60 shadow-sm flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+          <span className="truncate">{darkLabel}</span>
+        </div>
+        <div className="relative w-full bg-[#161a22] rounded-[30px] sm:rounded-[36px] p-1.5 sm:p-2 shadow-2xl border-2 border-gray-700/80 ring-2 ring-black/40">
+          {/* Side buttons */}
+          <div className="absolute -left-[4px] top-[50px] sm:top-[60px] w-[2px] h-[16px] sm:h-[20px] bg-gray-600 rounded-l" />
+          <div className="absolute -left-[4px] top-[75px] sm:top-[90px] w-[2px] h-[24px] sm:h-[30px] bg-gray-600 rounded-l" />
+          <div className="absolute -right-[4px] top-[65px] sm:top-[75px] w-[2px] h-[28px] sm:h-[35px] bg-gray-600 rounded-r" />
+
+          {/* Screen */}
+          <div className="relative w-full aspect-[9/19.5] bg-black rounded-[24px] sm:rounded-[28px] overflow-hidden flex flex-col shadow-inner">
+            <div className="w-full h-full overflow-hidden flex items-center justify-center">
+              {darkContent}
+            </div>
+            {/* Subtle Home Indicator */}
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-16 h-0.5 bg-white/30 rounded-full z-30 pointer-events-none" />
+          </div>
+        </div>
+      </div>
+
+      {/* Phone 2: Light Mode Phone */}
+      <div className="flex-1 max-w-[190px] sm:max-w-[240px] flex flex-col items-center group transition-transform duration-300 hover:scale-[1.02] hover:z-20">
+        <div className="mb-2 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-white/90 dark:bg-gray-800/80 text-gray-700 dark:text-gray-200 border border-gray-300/60 dark:border-gray-700/60 shadow-sm flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
+          <span className="truncate">{lightLabel}</span>
+        </div>
+        <div className="relative w-full bg-[#e8ecf2] dark:bg-[#202734] rounded-[30px] sm:rounded-[36px] p-1.5 sm:p-2 shadow-2xl border-2 border-gray-300/80 dark:border-gray-700/80 ring-2 ring-black/20">
+          {/* Side buttons */}
+          <div className="absolute -left-[4px] top-[50px] sm:top-[60px] w-[2px] h-[16px] sm:h-[20px] bg-gray-400 dark:bg-gray-600 rounded-l" />
+          <div className="absolute -left-[4px] top-[75px] sm:top-[90px] w-[2px] h-[24px] sm:h-[30px] bg-gray-400 dark:bg-gray-600 rounded-l" />
+          <div className="absolute -right-[4px] top-[65px] sm:top-[75px] w-[2px] h-[28px] sm:h-[35px] bg-gray-400 dark:bg-gray-600 rounded-r" />
+
+          {/* Screen */}
+          <div className="relative w-full aspect-[9/19.5] bg-[#eef2f7] dark:bg-[#12161f] rounded-[24px] sm:rounded-[28px] overflow-hidden flex flex-col shadow-inner">
+            <div className="w-full h-full overflow-hidden flex items-center justify-center">
+              {lightContent}
+            </div>
+            {/* Subtle Home Indicator */}
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-16 h-0.5 bg-black/20 dark:bg-white/30 rounded-full z-30 pointer-events-none" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+

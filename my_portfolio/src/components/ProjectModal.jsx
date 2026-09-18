@@ -11,9 +11,11 @@ import {
   ChevronRight,
   ShieldCheck,
   Sparkles,
-  Award
+  Award,
+  Download
 } from 'lucide-react';
 import ProjectImage from './ProjectImage';
+import { DualPhoneMockup } from './DeviceFrames';
 
 const isEmbedVideo = (url) => {
   if (!url) return false;
@@ -22,15 +24,19 @@ const isEmbedVideo = (url) => {
 
 const getEmbedUrl = (url) => {
   if (!url) return '';
+  if (url.includes('youtube.com/shorts/')) {
+    const id = url.split('youtube.com/shorts/')[1]?.split(/[?&]/)[0];
+    return `https://www.youtube.com/embed/${id}`;
+  }
   if (url.includes('youtube.com/watch?v=')) {
     return url.replace('watch?v=', 'embed/');
   }
   if (url.includes('youtu.be/')) {
-    const id = url.split('youtu.be/')[1]?.split('?')[0];
+    const id = url.split('youtu.be/')[1]?.split(/[?&]/)[0];
     return `https://www.youtube.com/embed/${id}`;
   }
   if (url.includes('vimeo.com/')) {
-    const id = url.split('vimeo.com/')[1]?.split('?')[0];
+    const id = url.split('vimeo.com/')[1]?.split(/[?&]/)[0];
     return `https://player.vimeo.com/video/${id}`;
   }
   return url;
@@ -94,10 +100,16 @@ const ProjectModal = ({ project, onClose }) => {
         >
           {/* Top Bar Header */}
           <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#e0e5ec]/95 dark:bg-[#1c222d]/95 backdrop-blur-md border-b border-gray-300/40 dark:border-gray-800">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 flex-wrap">
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1a3a5f] text-white dark:bg-blue-600">
                 {category}
               </span>
+              {project.firstProject && (
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-sm flex items-center gap-1">
+                  <Sparkles size={12} />
+                  First Ever Flutter Project
+                </span>
+              )}
               <h2 className="text-xl sm:text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 truncate max-w-[200px] sm:max-w-md">
                 {project.title || 'Project Details'}
               </h2>
@@ -143,6 +155,29 @@ const ProjectModal = ({ project, onClose }) => {
                       className="w-full h-full object-contain"
                     />
                   )
+                ) : currentMedia?.frame === 'dual-phone' ? (
+                  <div className="w-full h-full flex items-center justify-center p-2 sm:p-4 bg-gradient-to-br from-slate-950 via-[#10141d] to-slate-900 relative overflow-hidden">
+                    <div className="scale-[0.72] sm:scale-95 md:scale-100 origin-center w-full">
+                      <DualPhoneMockup
+                        darkContent={
+                          <ProjectImage
+                            src={project.image}
+                            alt={`${project.title} Dark Mode`}
+                            category={category}
+                            className="w-full h-full object-cover"
+                          />
+                        }
+                        lightContent={
+                          <ProjectImage
+                            src={project.secondaryImage || project.image}
+                            alt={`${project.title} Light Mode`}
+                            category={category}
+                            className="w-full h-full object-cover"
+                          />
+                        }
+                      />
+                    </div>
+                  </div>
                 ) : currentMedia?.frame === 'phone' ? (
                   <div className="w-full h-full flex items-center justify-center p-3 sm:p-4 bg-gradient-to-br from-slate-950 via-[#10141d] to-slate-900 relative">
                     <div className="h-[92%] max-h-[420px] aspect-[9/19.5] relative rounded-[28px] p-1.5 bg-[#1a202c] shadow-2xl border-2 border-gray-600/70">
@@ -249,7 +284,19 @@ const ProjectModal = ({ project, onClose }) => {
                   </a>
                 )}
 
-                {project.liveUrl && (
+                {project.downloadUrl && (
+                  <a
+                    href={project.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors"
+                  >
+                    <Download size={16} />
+                    {project.downloadLabel || 'Download APK'}
+                  </a>
+                )}
+
+                {project.liveUrl && !project.downloadUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
@@ -257,7 +304,7 @@ const ProjectModal = ({ project, onClose }) => {
                     className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors"
                   >
                     <ExternalLink size={16} />
-                    Open Live Demo
+                    {project.liveUrlLabel || 'Open Live Demo'}
                   </a>
                 )}
 
@@ -282,6 +329,13 @@ const ProjectModal = ({ project, onClose }) => {
                 </div>
               )}
             </div>
+
+            {/* Hero Statement */}
+            {project.caseStudy?.heroStatement && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-amber-500/10 border-l-4 border-amber-500 dark:border-amber-400 text-[#1a3a5f] dark:text-gray-100 font-medium text-sm sm:text-base leading-relaxed italic shadow-sm">
+                "{project.caseStudy.heroStatement}"
+              </div>
+            )}
 
             {/* In-Depth Case Study: Overview */}
             <div>

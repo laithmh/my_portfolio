@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import ProjectImage from './ProjectImage';
 import ProjectBuilderModal from './ProjectBuilderModal';
-import { PhoneFrame, LaptopFrame, DualDeviceMockup } from './DeviceFrames';
+import { PhoneFrame, LaptopFrame, DualDeviceMockup, DualPhoneMockup } from './DeviceFrames';
 import { projects } from '../data/portfolioData';
 
 const Projects = () => {
@@ -232,6 +232,25 @@ const Projects = () => {
                       className="w-full h-full object-cover"
                     />
                   </LaptopFrame>
+                ) : flagshipProject.mockup === 'dual-phone' ? (
+                  <DualPhoneMockup
+                    darkContent={
+                      <ProjectImage
+                        src={flagshipProject.image}
+                        alt={`${flagshipProject.title} Dark Mode`}
+                        category={flagshipProject.category}
+                        className="w-full h-full object-cover"
+                      />
+                    }
+                    lightContent={
+                      <ProjectImage
+                        src={flagshipProject.secondaryImage || flagshipProject.image}
+                        alt={`${flagshipProject.title} Light Mode`}
+                        category={flagshipProject.category}
+                        className="w-full h-full object-cover"
+                      />
+                    }
+                  />
                 ) : flagshipProject.mockup === 'phone' ? (
                   <PhoneFrame>
                     <ProjectImage

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon } from 'lucide-react';
+import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon, Download } from 'lucide-react';
 import ProjectImage from './ProjectImage';
 
 const ProjectCard = ({ project, onSelect }) => {
@@ -26,20 +26,57 @@ const ProjectCard = ({ project, onSelect }) => {
       <div>
         {/* Project Thumbnail with Fallback */}
         <div className="relative aspect-video overflow-hidden group-hover:opacity-95 transition-opacity">
-          <ProjectImage
-            src={project.image}
-            alt={project.title || "Project Preview"}
-            category={category}
-            className="w-full h-full"
-          />
+          {project.mockup === 'dual-phone' && project.secondaryImage ? (
+            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#141a26] to-[#0a0d13] flex items-center justify-center gap-3 sm:gap-4 px-4 pt-5 pb-2 relative overflow-hidden select-none">
+              {/* Subtle background glow */}
+              <div className="absolute top-0 left-1/4 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
-          {/* Featured Badge */}
-          {project.featured && (
+              {/* Phone 1: Dark Mode Phone */}
+              <div className="h-[78%] aspect-[9/19.5] rounded-[16px] sm:rounded-[20px] p-1 bg-[#12161f] border border-gray-700/90 shadow-2xl overflow-hidden flex flex-col transform -rotate-2 group-hover:rotate-0 transition-transform duration-300">
+                <div className="w-full h-full rounded-[12px] sm:rounded-[16px] overflow-hidden bg-black">
+                  <ProjectImage
+                    src={project.image}
+                    alt={`${project.title} Dark Mode`}
+                    category={category}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Phone 2: Light Mode Phone */}
+              <div className="h-[78%] aspect-[9/19.5] rounded-[16px] sm:rounded-[20px] p-1 bg-[#e2e8f0] border border-gray-300/90 shadow-2xl overflow-hidden flex flex-col transform rotate-2 group-hover:rotate-0 transition-transform duration-300">
+                <div className="w-full h-full rounded-[12px] sm:rounded-[16px] overflow-hidden bg-white">
+                  <ProjectImage
+                    src={project.secondaryImage}
+                    alt={`${project.title} Light Mode`}
+                    category={category}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <ProjectImage
+              src={project.image}
+              alt={project.title || "Project Preview"}
+              category={category}
+              className="w-full h-full"
+            />
+          )}
+
+          {/* First Project Badge or Featured Badge */}
+          {project.firstProject ? (
+            <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md z-10">
+              <Sparkles size={11} />
+              First Flutter Project
+            </div>
+          ) : project.featured ? (
             <div className="absolute top-3 left-3 bg-[#1a3a5f]/90 dark:bg-blue-600/90 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md z-10">
               <Sparkles size={12} />
               Featured
             </div>
-          )}
+          ) : null}
 
           {/* Media Counter Pill */}
           <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/75 backdrop-blur-sm text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-md z-10">
@@ -112,7 +149,20 @@ const ProjectCard = ({ project, onSelect }) => {
             </motion.a>
           )}
 
-          {project.liveUrl && (
+          {project.downloadUrl ? (
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              href={project.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`Download ${project.title || 'Project'} APK`}
+              className="p-2 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-emerald-600 dark:text-emerald-400 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+            >
+              <Download size={16} />
+            </motion.a>
+          ) : project.liveUrl ? (
             <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -125,7 +175,7 @@ const ProjectCard = ({ project, onSelect }) => {
             >
               <ExternalLink size={16} />
             </motion.a>
-          )}
+          ) : null}
         </div>
       </div>
     </motion.div>
