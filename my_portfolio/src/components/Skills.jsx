@@ -43,9 +43,9 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: groupIdx * 0.1 }}
-              className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-7 shadow-neu-flat dark:shadow-neu-dark-flat transition-colors border border-white/40 dark:border-gray-800"
+              className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-5 sm:p-7 shadow-neu-flat dark:shadow-neu-dark-flat transition-colors border border-white/40 dark:border-gray-800"
             >
-              <div className="flex items-center justify-between gap-3 mb-6">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 mb-5 sm:mb-6">
                 <div className="flex items-center gap-3">
                   <div className="p-3 rounded-xl bg-white/40 dark:bg-white/5 shadow-sm">
                     {getTierIcon(tierGroup.tier)}

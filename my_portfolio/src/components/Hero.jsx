@@ -56,7 +56,7 @@ const Hero = ({ scrollToSection }) => {
             {/* Ambient Cosmic Glow behind Moon */}
             <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-blue-500/25 via-indigo-500/20 to-purple-500/25 blur-2xl opacity-70 dark:opacity-50 pointer-events-none group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="relative bg-[#e0e5ec] dark:bg-[#1c222d] w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full shadow-neu-flat dark:shadow-neu-dark-flat overflow-hidden flex items-center justify-center transition-colors duration-300 border-2 border-white/70 dark:border-gray-800/80">
+            <div className="relative bg-[#e0e5ec] dark:bg-[#1c222d] w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full shadow-neu-flat dark:shadow-neu-dark-flat overflow-hidden flex items-center justify-center transition-colors duration-300 border-2 border-white/70 dark:border-gray-800/80">
               <RiveAnimation />
             </div>
           </motion.div>
@@ -73,7 +73,7 @@ const Hero = ({ scrollToSection }) => {
           </motion.div>
 
           {/* Name Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-3 bg-gradient-to-r from-[#1a3a5f] via-[#2c5282] to-[#5d7d9e] dark:from-blue-200 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-3 bg-gradient-to-r from-[#1a3a5f] via-[#2c5282] to-[#5d7d9e] dark:from-blue-200 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
             {personalInfo.name}
           </h1>
 
@@ -129,13 +129,13 @@ const Hero = ({ scrollToSection }) => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto"
           >
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => scrollToSection('projects')}
-              className="flex items-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-7 py-3 rounded-xl font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-7 py-3 rounded-xl font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-all"
             >
               <FolderGit2 size={18} />
               Explore Systems & Apps
@@ -148,7 +148,7 @@ const Hero = ({ scrollToSection }) => {
               download="Laith_Mohammed_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               <FileDown size={18} />
               Download CV
@@ -158,7 +158,7 @@ const Hero = ({ scrollToSection }) => {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => scrollToSection('contact')}
-              className="flex items-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               <Send size={18} />
               Get In Touch

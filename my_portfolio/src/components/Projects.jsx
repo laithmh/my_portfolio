@@ -117,7 +117,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-24 p-6 sm:p-10 rounded-3xl bg-[#e0e5ec] dark:bg-[#1c222d] shadow-neu-flat dark:shadow-neu-dark-flat border border-white/40 dark:border-gray-800"
+            className="mb-24 p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-[#e0e5ec] dark:bg-[#1c222d] shadow-neu-flat dark:shadow-neu-dark-flat border border-white/40 dark:border-gray-800"
           >
             <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
               {/* Left Column: Full-Stack Narrative */}
@@ -141,7 +141,7 @@ const Projects = () => {
 
                 {/* System Architecture Flow Diagram */}
                 {flagshipProject.systemArchitecture && (
-                  <div className="p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-gray-800">
+                  <div className="p-3 sm:p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-gray-800">
                     <span className="text-[11px] uppercase tracking-wider font-bold text-[#5d7d9e] dark:text-gray-400 block mb-2">
                       End-to-End System Pipeline
                     </span>
@@ -167,12 +167,12 @@ const Projects = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleSelectProject(flagshipProject)}
-                    className="inline-flex items-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:opacity-95 transition-opacity"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:opacity-95 transition-opacity text-center"
                   >
                     View System Case Study & Architecture
                     <ArrowRight size={16} />
@@ -185,7 +185,7 @@ const Projects = () => {
                       href={flagshipProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-5 py-3 rounded-xl text-sm font-bold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-5 py-3 rounded-xl text-sm font-bold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all text-center"
                     >
                       <Github size={16} />
                       Showcase Repo

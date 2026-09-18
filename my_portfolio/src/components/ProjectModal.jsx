@@ -80,7 +80,7 @@ const ProjectModal = ({ project, onClose }) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -96,21 +96,21 @@ const ProjectModal = ({ project, onClose }) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#e0e5ec] dark:bg-[#1c222d] text-gray-800 dark:text-gray-100 rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-white/20 dark:border-gray-800"
+          className="relative w-full max-w-4xl max-h-[96vh] sm:max-h-[92vh] flex flex-col bg-[#e0e5ec] dark:bg-[#1c222d] text-gray-800 dark:text-gray-100 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-white/20 dark:border-gray-800"
         >
           {/* Top Bar Header */}
-          <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#e0e5ec]/95 dark:bg-[#1c222d]/95 backdrop-blur-md border-b border-gray-300/40 dark:border-gray-800">
-            <div className="flex items-center gap-2.5 flex-wrap">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1a3a5f] text-white dark:bg-blue-600">
+          <div className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-[#e0e5ec]/95 dark:bg-[#1c222d]/95 backdrop-blur-md border-b border-gray-300/40 dark:border-gray-800 gap-2">
+            <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap min-w-0">
+              <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-[#1a3a5f] text-white dark:bg-blue-600 flex-shrink-0">
                 {category}
               </span>
               {project.firstProject && (
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-sm flex items-center gap-1">
+                <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-sm flex items-center gap-1 flex-shrink-0">
                   <Sparkles size={12} />
-                  First Ever Flutter Project
+                  First Project
                 </span>
               )}
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 truncate max-w-[200px] sm:max-w-md">
+              <h2 className="text-base sm:text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 truncate max-w-[130px] sm:max-w-md">
                 {project.title || 'Project Details'}
               </h2>
             </div>
@@ -120,14 +120,14 @@ const ProjectModal = ({ project, onClose }) => {
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
               aria-label="Close modal"
-              className="p-2 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-gray-600 dark:text-gray-300 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+              className="p-2 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-gray-600 dark:text-gray-300 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all flex-shrink-0"
             >
               <X size={20} />
             </motion.button>
           </div>
 
           {/* Scrollable Content Body */}
-          <div className="overflow-y-auto p-6 space-y-8">
+          <div className="overflow-y-auto p-4 sm:p-6 space-y-6 sm:space-y-8">
             {/* Tagline */}
             {project.tagline && (
               <p className="text-lg font-medium text-[#5d7d9e] dark:text-blue-300">
@@ -271,13 +271,13 @@ const ProjectModal = ({ project, onClose }) => {
 
             {/* Quick Action Bar for Recruiter */}
             <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/40 dark:bg-white/5 shadow-sm">
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3">
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:opacity-90 transition-opacity"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:opacity-90 transition-opacity text-center"
                   >
                     <Github size={16} />
                     View Showcase Repo
@@ -289,7 +289,7 @@ const ProjectModal = ({ project, onClose }) => {
                     href={project.downloadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors text-center"
                   >
                     <Download size={16} />
                     {project.downloadLabel || 'Download APK'}
@@ -301,7 +301,7 @@ const ProjectModal = ({ project, onClose }) => {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors text-center"
                   >
                     <ExternalLink size={16} />
                     {project.liveUrlLabel || 'Open Live Demo'}
@@ -313,7 +313,7 @@ const ProjectModal = ({ project, onClose }) => {
                     href={project.demoVideoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-indigo-700 transition-colors"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-indigo-700 transition-colors text-center"
                   >
                     <Play size={16} />
                     Watch Video Walkthrough

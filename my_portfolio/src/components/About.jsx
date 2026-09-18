@@ -42,7 +42,7 @@ const About = () => {
         </motion.div>
 
         {/* Highlights Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
           {highlights.map((item, index) => (
             <motion.div
               key={index}
@@ -50,7 +50,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-6 text-center shadow-neu-flat dark:shadow-neu-dark-flat flex flex-col items-center justify-center transition-colors border border-white/40 dark:border-gray-800"
+              className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-5 sm:p-6 text-center shadow-neu-flat dark:shadow-neu-dark-flat flex flex-col items-center justify-center transition-colors border border-white/40 dark:border-gray-800"
             >
               <div className="mb-3 p-3 rounded-xl bg-white/50 dark:bg-white/5 shadow-inner">
                 {item.icon}
@@ -66,13 +66,13 @@ const About = () => {
         </div>
 
         {/* Two-Column Detail Cards */}
-        <div className="grid md:grid-cols-2 gap-8 items-stretch mb-8">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-stretch mb-8">
           {/* Journey & Experience */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl shadow-neu-flat dark:shadow-neu-dark-flat p-8 flex flex-col justify-between transition-colors border border-white/40 dark:border-gray-800"
+            className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl shadow-neu-flat dark:shadow-neu-dark-flat p-6 sm:p-8 flex flex-col justify-between transition-colors border border-white/40 dark:border-gray-800"
           >
             <div>
               <h3 className="text-2xl font-bold mb-4 text-[#1a3a5f] dark:text-gray-100 flex items-center gap-2">
@@ -90,7 +90,7 @@ const About = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl shadow-neu-flat dark:shadow-neu-dark-flat p-8 flex flex-col justify-between transition-colors border border-white/40 dark:border-gray-800"
+            className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl shadow-neu-flat dark:shadow-neu-dark-flat p-6 sm:p-8 flex flex-col justify-between transition-colors border border-white/40 dark:border-gray-800"
           >
             <div>
               <h3 className="text-2xl font-bold mb-4 text-[#1a3a5f] dark:text-gray-100 flex items-center gap-2">

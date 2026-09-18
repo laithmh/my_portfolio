@@ -21,7 +21,7 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="relative border-l-2 border-[#a3b1c6]/50 dark:border-gray-700 ml-4 sm:ml-8 space-y-10">
+        <div className="relative border-l-2 border-[#a3b1c6]/50 dark:border-gray-700 ml-2 sm:ml-8 space-y-8 sm:space-y-10">
           {experienceTimeline.map((item, index) => (
             <motion.div
               key={index}
@@ -29,12 +29,12 @@ const Experience = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15 }}
-              className="relative pl-6 sm:pl-8"
+              className="relative pl-4 sm:pl-8"
             >
               {/* Timeline Indicator Dot */}
-              <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#e0e5ec] dark:border-[#1c222d] shadow-sm" />
+              <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#e0e5ec] dark:border-[#1c222d] shadow-sm" />
 
-              <div className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-6 sm:p-7 shadow-neu-flat dark:shadow-neu-dark-flat transition-colors">
+              <div className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-4 sm:p-7 shadow-neu-flat dark:shadow-neu-dark-flat transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
                     <Calendar size={13} />

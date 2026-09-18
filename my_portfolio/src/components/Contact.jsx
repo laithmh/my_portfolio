@@ -53,7 +53,7 @@ const Contact = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-3xl p-8 sm:p-10 shadow-neu-flat dark:shadow-neu-dark-flat max-w-xl mx-auto mb-12 transition-colors"
+          className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-neu-flat dark:shadow-neu-dark-flat max-w-xl mx-auto mb-12 transition-colors border border-white/40 dark:border-gray-800"
         >
           <div className="w-14 h-14 rounded-2xl bg-[#1a3a5f] dark:bg-blue-600 text-white flex items-center justify-center mx-auto mb-6 shadow-md">
             <Mail size={26} />
@@ -71,10 +71,10 @@ const Contact = () => {
           </a>
 
           {/* Action Buttons: Open Mail client & Copy Email */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 mt-6 w-full max-w-xs sm:max-w-none mx-auto">
             <a
               href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-opacity"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-opacity"
             >
               <Mail size={16} />
               Open Email App
@@ -83,7 +83,7 @@ const Contact = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={handleCopyEmail}
-              className="inline-flex items-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 text-sm font-semibold px-5 py-2.5 rounded-xl shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 text-sm font-semibold px-5 py-2.5 rounded-xl shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               {copied ? (
                 <>

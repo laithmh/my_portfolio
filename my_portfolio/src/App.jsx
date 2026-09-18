@@ -13,26 +13,10 @@ const App = () => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        return savedTheme === 'dark';
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return savedTheme === 'dark';
     }
     return false;
   });
-
-  // Listen to OS system theme changes if no manual preference is saved
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleOSChange = (e) => {
-      const savedTheme = localStorage.getItem('theme');
-      if (!savedTheme) {
-        setIsDark(e.matches);
-      }
-    };
-    mediaQuery.addEventListener('change', handleOSChange);
-    return () => mediaQuery.removeEventListener('change', handleOSChange);
-  }, []);
 
   // Synchronize dark class on <html> root element
   useEffect(() => {
