@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "new-project": "node scripts/create-project.js"
   },
   "dependencies": {
     "@rive-app/react-canvas": "^4.23.4",
