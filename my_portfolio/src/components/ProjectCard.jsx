@@ -26,7 +26,51 @@ const ProjectCard = ({ project, onSelect }) => {
       <div>
         {/* Project Thumbnail with Fallback */}
         <div className="relative aspect-video overflow-hidden group-hover:opacity-95 transition-opacity">
-          {project.mockup === 'dual-phone' && project.secondaryImage ? (
+          {project.mockup === 'dual' && project.secondaryImage ? (
+            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#141a26] to-[#0a0d13] p-3 pt-5 pb-2 relative overflow-hidden select-none flex items-center justify-center">
+              {/* Ambient Glows */}
+              <div className="absolute top-0 left-1/3 w-36 h-36 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-indigo-500/15 rounded-full blur-2xl pointer-events-none" />
+
+              {/* Responsive Container for Dual Device */}
+              <div className="relative w-[95%] h-[92%] flex items-center">
+                {/* Background: Laptop Mockup */}
+                <div className="w-[88%] h-[90%] flex flex-col">
+                  {/* Laptop Lid */}
+                  <div className="w-full h-full bg-[#1e2430] dark:bg-[#0d1117] rounded-t-xl p-1 shadow-2xl border-t border-x border-gray-500/40 relative flex flex-col">
+                    {/* Camera Dot */}
+                    <div className="w-1 h-1 rounded-full bg-black border border-gray-600 mx-auto mb-0.5" />
+                    {/* Screen */}
+                    <div className="w-full flex-1 rounded-md overflow-hidden bg-black relative shadow-inner">
+                      <ProjectImage
+                        src={project.image}
+                        alt={`${project.title} Web View`}
+                        category={category}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  {/* Laptop Base */}
+                  <div className="w-[104%] -ml-[2%] h-1.5 bg-gradient-to-b from-[#8a94a6] to-[#5b6577] dark:from-[#2e3746] dark:to-[#171c24] rounded-b-md shadow-md border-t border-white/20" />
+                </div>
+
+                {/* Foreground: Floating Phone Mockup */}
+                <div className="absolute right-0 bottom-0.5 w-[27%] max-w-[95px] aspect-[9/19.5] rounded-[14px] sm:rounded-[16px] p-0.5 sm:p-1 bg-[#161a22] border-2 border-gray-600/80 shadow-2xl overflow-hidden flex flex-col z-20 transform transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1">
+                  {/* Notch */}
+                  <div className="w-5 sm:w-6 h-1 bg-black rounded-full mx-auto my-0.5 z-10" />
+                  {/* Screen */}
+                  <div className="w-full flex-1 rounded-[10px] sm:rounded-[12px] overflow-hidden bg-black shadow-inner">
+                    <ProjectImage
+                      src={project.secondaryImage}
+                      alt={`${project.title} Mobile View`}
+                      category={category}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : project.mockup === 'dual-phone' && project.secondaryImage ? (
             <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#141a26] to-[#0a0d13] flex items-center justify-center gap-3 sm:gap-4 px-4 pt-5 pb-2 relative overflow-hidden select-none">
               {/* Subtle background glow */}
               <div className="absolute top-0 left-1/4 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
