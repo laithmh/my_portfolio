@@ -16,7 +16,7 @@ const getCategoryIcon = (category) => {
   }
 };
 
-const resolveAssetPath = (src) => {
+export const resolveAssetPath = (src) => {
   if (!src) return '';
   if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
     return src;

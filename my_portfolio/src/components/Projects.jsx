@@ -293,11 +293,10 @@ const Projects = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedCategory(category)}
-                      className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all ${
-                        isSelected
+                      className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all ${isSelected
                           ? 'bg-[#1a3a5f] text-white dark:bg-blue-600 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm'
                           : 'bg-[#e0e5ec] dark:bg-[#1c222d] text-[#5d7d9e] dark:text-gray-300 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed'
-                      }`}
+                        }`}
                     >
                       {category}
                     </motion.button>

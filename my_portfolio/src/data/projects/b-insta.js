@@ -17,6 +17,7 @@ export default {
 
   image: "/projects/b-insta-web.png",
   secondaryImage: "/projects/b-insta-mobile.jpg",
+  logo: "/projects/b-insta-logo.png",
 
   media: [
     {

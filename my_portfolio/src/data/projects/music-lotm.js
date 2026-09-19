@@ -8,7 +8,7 @@ export default {
   title: "MusicLotm",
   tagline: "First-Ever Flutter Project • Offline Android Music Player & Native DSP Visualizer",
   category: "Flutter",
-  order: 2,
+  order: 3,
   featured: true,
   firstProject: true,
   firstProjectBadge: "First Ever Flutter Project",
@@ -18,6 +18,7 @@ export default {
 
   image: "/projects/music-lotm-dark.jpg",
   secondaryImage: "/projects/music-lotm-light.jpg",
+  logo: "/projects/music-lotm-logo.jpg",
 
   media: [
     {

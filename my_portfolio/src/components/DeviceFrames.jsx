@@ -207,4 +207,87 @@ export const DualPhoneMockup = ({
   );
 };
 
+/**
+ * Tablet Device Frame
+ * Clean, CSS-rendered tablet chassis for showcasing director monitors, field displays, and dashboards.
+ */
+export const TabletFrame = ({ children, className = "" }) => {
+  return (
+    <div className={`relative mx-auto w-full max-w-[420px] bg-[#1a202c] dark:bg-[#0d1117] rounded-[28px] sm:rounded-[36px] p-2.5 sm:p-3.5 shadow-2xl border-2 sm:border-4 border-gray-400/40 dark:border-gray-700/80 ring-1 ring-black/20 transition-transform duration-300 hover:scale-[1.01] ${className}`}>
+      {/* Outer Shell Details: Side Buttons */}
+      <div className="absolute top-[60px] -right-[6px] sm:-right-[7px] w-[3px] h-[36px] bg-gray-400 dark:bg-gray-600 rounded-r" />
+      <div className="absolute top-[105px] -right-[6px] sm:-right-[7px] w-[3px] h-[36px] bg-gray-400 dark:bg-gray-600 rounded-r" />
+
+      {/* Screen Area */}
+      <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] bg-slate-950 rounded-[20px] sm:rounded-[26px] overflow-hidden flex flex-col shadow-inner">
+        {/* Top Bezel Camera Dot */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-gray-700 flex items-center justify-center z-30">
+          <div className="w-1 h-1 rounded-full bg-blue-500/80" />
+        </div>
+
+        {/* Screen Content */}
+        <div className="w-full h-full overflow-hidden flex items-center justify-center">
+          {children}
+        </div>
+
+        {/* Subtle Home Indicator */}
+        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-24 h-1 bg-white/30 rounded-full z-30 pointer-events-none" />
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Tablet + Phone Dual Mockup (Wireless Monitor Ecosystem)
+ * Director Monitor Tablet in the background with Camera Smartphone in the foreground.
+ */
+export const TabletPhoneMockup = ({
+  tabletContent,
+  phoneContent,
+  className = ""
+}) => {
+  return (
+    <div className={`relative w-full max-w-xl mx-auto select-none py-2 ${className}`}>
+      {/* Background: Director Tablet */}
+      <div className="w-[82%] sm:w-[78%] mx-auto sm:ml-4">
+        <div className="relative bg-[#161a23] dark:bg-[#0d1117] rounded-[24px] sm:rounded-[32px] p-2 sm:p-2.5 shadow-2xl border-2 border-gray-400/40 dark:border-gray-700/70 ring-1 ring-black/30">
+          {/* Bezel Camera */}
+          <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-gray-600 z-20 flex items-center justify-center">
+            <div className="w-0.5 h-0.5 rounded-full bg-blue-400/80" />
+          </div>
+          {/* Tablet Screen */}
+          <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] bg-black rounded-[18px] sm:rounded-[24px] overflow-hidden flex flex-col shadow-inner">
+            <div className="w-full h-full overflow-hidden flex items-center justify-center">
+              {tabletContent}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Foreground: Floating Camera Smartphone */}
+      <div className="absolute -bottom-2 sm:bottom-0 right-1 sm:right-3 w-[135px] sm:w-[160px] md:w-[175px] z-20 transition-transform duration-300 hover:scale-105 filter drop-shadow-2xl">
+        <div className="relative bg-[#1a202c] dark:bg-[#0e131b] rounded-[24px] sm:rounded-[30px] p-1.5 shadow-2xl border-2 border-blue-500/50 dark:border-blue-500/40 ring-2 ring-black/50">
+          {/* Side Buttons */}
+          <div className="absolute -left-[4px] top-[40px] w-[2px] h-[14px] bg-gray-500 rounded-l" />
+          <div className="absolute -left-[4px] top-[60px] w-[2px] h-[22px] bg-gray-500 rounded-l" />
+
+          {/* Phone Screen */}
+          <div className="relative w-full aspect-[9/19.5] bg-black rounded-[18px] sm:rounded-[22px] overflow-hidden flex flex-col shadow-inner">
+            {/* Dynamic Island */}
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 sm:w-12 h-2.5 bg-black rounded-full z-30 flex items-center justify-end px-1">
+              <div className="w-1 h-1 rounded-full bg-blue-500/80" />
+            </div>
+            {/* Screen Viewport */}
+            <div className="w-full h-full overflow-hidden flex items-center justify-center">
+              {phoneContent}
+            </div>
+            {/* Home indicator */}
+            <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-white/40 rounded-full z-30 pointer-events-none" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 

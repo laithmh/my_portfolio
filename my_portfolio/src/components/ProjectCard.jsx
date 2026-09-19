@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon, Download } from 'lucide-react';
-import ProjectImage from './ProjectImage';
+import ProjectImage, { resolveAssetPath } from './ProjectImage';
 
 const ProjectCard = ({ project, onSelect }) => {
   if (!project) return null;
@@ -100,6 +100,47 @@ const ProjectCard = ({ project, onSelect }) => {
                 </div>
               </div>
             </div>
+          ) : (project.mockup === 'tablet-phone' || project.mockup === 'dual-tablet-phone') && project.secondaryImage ? (
+            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#131924] to-[#0a0d13] p-2 sm:p-3 relative overflow-hidden select-none flex items-center justify-center">
+              {/* Ambient Glows */}
+              <div className="absolute top-0 left-1/3 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 right-1/4 w-28 h-28 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none" />
+
+              {/* Responsive Container for Tablet + Phone with Balanced Scale */}
+              <div className="relative w-[90%] h-[88%] flex items-center">
+                {/* Background: Director Tablet (scaled appropriately) */}
+                <div className="w-[58%] sm:w-[55%] h-[82%] sm:h-[84%] flex flex-col ml-3 sm:ml-5 my-auto">
+                  <div className="w-full h-full bg-[#161a23] dark:bg-[#0d1117] rounded-[16px] sm:rounded-[20px] p-1 sm:p-1.5 shadow-2xl border border-gray-500/40 relative flex flex-col">
+                    {/* Tablet Camera Dot */}
+                    <div className="w-1 h-1 rounded-full bg-black border border-gray-600 mx-auto mb-0.5" />
+                    {/* Screen */}
+                    <div className="w-full flex-1 rounded-[12px] sm:rounded-[15px] overflow-hidden bg-black relative shadow-inner">
+                      <ProjectImage
+                        src={project.image}
+                        alt={`${project.title} Director Tablet`}
+                        category={category}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Foreground: Floating Camera Phone */}
+                <div className="absolute right-2 sm:right-5 bottom-1 sm:bottom-1.5 w-[24%] max-w-[85px] sm:max-w-[92px] aspect-[9/19.5] rounded-[12px] sm:rounded-[14px] p-0.5 sm:p-1 bg-[#161a22] border-2 border-blue-500/50 shadow-2xl overflow-hidden flex flex-col z-20 transform transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1">
+                  {/* Notch */}
+                  <div className="w-4 sm:w-5 h-0.5 bg-black rounded-full mx-auto my-0.5 z-10" />
+                  {/* Screen */}
+                  <div className="w-full flex-1 rounded-[9px] sm:rounded-[11px] overflow-hidden bg-black shadow-inner">
+                    <ProjectImage
+                      src={project.secondaryImage}
+                      alt={`${project.title} Camera Phone`}
+                      category={category}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
             <ProjectImage
               src={project.image}
@@ -144,9 +185,21 @@ const ProjectCard = ({ project, onSelect }) => {
 
         {/* Card Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold mb-2 text-[#1a3a5f] dark:text-gray-100 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            {project.title || 'Untitled Project'}
-          </h3>
+          <div className="flex items-center gap-3 mb-2">
+            {project.logo && (
+              <div className="w-9 h-9 rounded-xl overflow-hidden bg-white/90 dark:bg-black/40 p-1 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm border border-gray-300/40 dark:border-gray-700/60 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <img
+                  src={resolveAssetPath(project.logo)}
+                  alt={`${project.title} logo`}
+                  className="w-full h-full object-contain rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <h3 className="text-xl font-bold text-[#1a3a5f] dark:text-gray-100 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {project.title || 'Untitled Project'}
+            </h3>
+          </div>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 leading-relaxed">
             {project.description || 'Click to view project details and architecture overview.'}
           </p>

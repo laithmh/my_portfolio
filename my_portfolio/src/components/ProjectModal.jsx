@@ -14,8 +14,8 @@ import {
   Award,
   Download
 } from 'lucide-react';
-import ProjectImage from './ProjectImage';
-import { DualPhoneMockup } from './DeviceFrames';
+import ProjectImage, { resolveAssetPath } from './ProjectImage';
+import { DualPhoneMockup, TabletFrame, TabletPhoneMockup } from './DeviceFrames';
 
 const isEmbedVideo = (url) => {
   if (!url) return false;
@@ -101,6 +101,15 @@ const ProjectModal = ({ project, onClose }) => {
           {/* Top Bar Header */}
           <div className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-[#e0e5ec]/95 dark:bg-[#1c222d]/95 backdrop-blur-md border-b border-gray-300/40 dark:border-gray-800 gap-2">
             <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap min-w-0">
+              {project.logo && (
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden bg-white/90 dark:bg-black/40 p-1 shadow-sm border border-gray-300/50 dark:border-gray-700/60 flex items-center justify-center flex-shrink-0">
+                  <img
+                    src={resolveAssetPath(project.logo)}
+                    alt={`${project.title} logo`}
+                    className="w-full h-full object-contain rounded-lg"
+                  />
+                </div>
+              )}
               <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-[#1a3a5f] text-white dark:bg-blue-600 flex-shrink-0">
                 {category}
               </span>
@@ -176,6 +185,43 @@ const ProjectModal = ({ project, onClose }) => {
                           />
                         }
                       />
+                    </div>
+                  </div>
+                ) : currentMedia?.frame === 'tablet-phone' ? (
+                  <div className="w-full h-full flex items-center justify-center p-2 sm:p-4 bg-gradient-to-br from-slate-950 via-[#10141d] to-slate-900 relative overflow-hidden">
+                    <div className="scale-[0.82] sm:scale-95 md:scale-100 origin-center w-full">
+                      <TabletPhoneMockup
+                        tabletContent={
+                          <ProjectImage
+                            src={project.image}
+                            alt={`${project.title} Director Monitor`}
+                            category={category}
+                            className="w-full h-full object-cover"
+                          />
+                        }
+                        phoneContent={
+                          <ProjectImage
+                            src={project.secondaryImage || project.image}
+                            alt={`${project.title} Camera Phone`}
+                            category={category}
+                            className="w-full h-full object-cover"
+                          />
+                        }
+                      />
+                    </div>
+                  </div>
+                ) : currentMedia?.frame === 'tablet' ? (
+                  <div className="w-full h-full flex items-center justify-center p-3 sm:p-4 bg-gradient-to-br from-slate-950 via-[#10141d] to-slate-900 relative">
+                    <div className="h-[94%] max-h-[440px] aspect-[3/4] sm:aspect-[4/5] relative rounded-[22px] sm:rounded-[26px] p-2 bg-[#1a202c] shadow-2xl border-2 border-gray-600/70 flex flex-col">
+                      <div className="w-1.5 h-1.5 rounded-full bg-black border border-gray-600 mx-auto mb-1 z-20" />
+                      <div className="w-full flex-1 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-black flex items-center justify-center">
+                        <ProjectImage
+                          src={currentMedia?.url}
+                          alt={currentMedia?.caption || project.title}
+                          category={category}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
                 ) : currentMedia?.frame === 'phone' ? (
