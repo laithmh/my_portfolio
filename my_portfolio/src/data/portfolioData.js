@@ -2,14 +2,14 @@ import { allProjects } from './projects/index.js';
 
 export const personalInfo = {
   name: "LAITH MOHAMMED",
-  role: "Full-Stack Engineer",
+  role: "Full-Stack Product Engineer",
   tagline: "Architecting end-to-end digital products — from multi-tenant Next.js SaaS platforms and high-performance Flutter WebAssembly tools to robust Supabase & PostgreSQL backends.",
   email: "laithmhwork@gmail.com",
-  location: "Available for Remote Full-Stack & Engineering Roles",
+  location: "Available for Remote Product Engineering & Full-Stack Roles",
   resumeFile: "laith_mohammed_resume.pdf",
   coreFocus: "Next.js • Flutter / WASM • Supabase / PostgreSQL",
   
-  aboutBio: `Independent Full-Stack Engineer with deep experience building production-grade digital products from zero to deployment. Rather than following tutorials, I learn by building complete, complex software systems: from multi-tenant SaaS platforms with Next.js and Supabase (PostgreSQL, RLS, Auth) to browser-based canvas editors powered by Flutter WebAssembly (WASM), and offline peer-to-peer networking utilities over local Wi-Fi hotspots. I thrive in autonomous environments where full-stack ownership, product intuition, and technical resourcefulness are required to ship real solutions.`,
+  aboutBio: `Independent Full-Stack Product Engineer with deep experience building production-grade digital products from zero to deployment. Rather than following tutorials, I learn by building complete, complex software systems: from multi-tenant SaaS platforms with Next.js and Supabase (PostgreSQL, RLS, Auth) to browser-based canvas editors powered by Flutter WebAssembly (WASM), and offline peer-to-peer networking utilities over local Wi-Fi hotspots. I thrive in autonomous environments where full-stack ownership, product intuition, and technical resourcefulness are required to ship real solutions.`,
 
   engineeringPillars: [
     {
