@@ -2,23 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Laith Mohammed | Full-Stack Engineer</title>
-    <meta name="description" content="Portfolio of Laith Mohammed - Full-Stack Engineer specializing in Next.js, Flutter & WebAssembly, Supabase, and PostgreSQL architectures." />
-    <meta name="keywords" content="Laith Mohammed, Full-Stack Engineer, Next.js, Flutter, Flutter WASM, WebAssembly, Supabase, PostgreSQL, React, Software Engineer" />
-    <meta name="author" content="Laith Mohammed" />
+    <title>Laith Muhammad | Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Laith Muhammad - Full-Stack Engineer specializing in Next.js, Flutter & WebAssembly, Supabase, and PostgreSQL architectures." />
+    <meta name="keywords" content="Laith Muhammad, Full-Stack Engineer, Next.js, Flutter, Flutter WASM, WebAssembly, Supabase, PostgreSQL, React, Software Engineer" />
+    <meta name="author" content="Laith Muhammad" />
     
-    <!-- Open Graph / Social Media -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Laith Mohammed | Full-Stack Engineer" />
-    <meta property="og:description" content="Explore full-stack platforms, WebAssembly browser tools, and cross-platform systems by Laith Mohammed." />
     <meta property="og:url" content="https://laithmh.github.io/my_portfolio/" />
+    <meta property="og:title" content="Laith Muhammad | Developer Portfolio" />
+    <meta property="og:description" content="Explore full-stack platforms, WebAssembly browser tools, and cross-platform systems by Laith Muhammad." />
+    <meta property="og:image" content="https://laithmh.github.io/my_portfolio/projects/b-insta-web.png" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://laithmh.github.io/my_portfolio/" />
+    <meta name="twitter:title" content="Laith Muhammad | Developer Portfolio" />
+    <meta name="twitter:description" content="Explore full-stack platforms, WebAssembly browser tools, and cross-platform systems by Laith Muhammad." />
+    <meta name="twitter:image" content="https://laithmh.github.io/my_portfolio/projects/b-insta-web.png" />
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- GitHub Pages Single Page Apps Redirect Handler -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+
     <!-- Early Saved Theme Sync (Light mode is default) -->
     <script>
       (function() {

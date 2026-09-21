@@ -14,7 +14,8 @@ import {
   Award,
   Download
 } from 'lucide-react';
-import ProjectImage, { resolveAssetPath } from './ProjectImage';
+import ProjectImage from './ProjectImage';
+import { resolveAssetPath } from '../utils/assetHelper';
 import { DualPhoneMockup, TabletFrame, TabletPhoneMockup } from './DeviceFrames';
 
 const isEmbedVideo = (url) => {

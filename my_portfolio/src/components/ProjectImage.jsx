@@ -16,16 +16,7 @@ const getCategoryIcon = (category) => {
   }
 };
 
-export const resolveAssetPath = (src) => {
-  if (!src) return '';
-  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
-    return src;
-  }
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-  const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
-  return `${cleanBase}${cleanSrc}`;
-};
+import { resolveAssetPath } from '../utils/assetHelper';
 
 const ProjectImage = ({
   src,

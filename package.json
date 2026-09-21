@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-root",
+  "private": true,
+  "description": "Root workspace proxy for portfolio Vite app",
+  "scripts": {
+    "dev": "npm run dev --prefix my_portfolio",
+    "build": "npm run build --prefix my_portfolio",
+    "lint": "npm run lint --prefix my_portfolio",
+    "preview": "npm run preview --prefix my_portfolio"
+  }
+}

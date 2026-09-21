@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon, Download } from 'lucide-react';
-import ProjectImage, { resolveAssetPath } from './ProjectImage';
+import ProjectImage from './ProjectImage';
+import { resolveAssetPath } from '../utils/assetHelper';
 
 const ProjectCard = ({ project, onSelect }) => {
   if (!project) return null;
