@@ -6,9 +6,12 @@ import ProjectModal from './ProjectModal';
 import ProjectImage from './ProjectImage';
 import ProjectBuilderModal from './ProjectBuilderModal';
 import { PhoneFrame, LaptopFrame, DualDeviceMockup, DualPhoneMockup } from './DeviceFrames';
-import { projects } from '../data/portfolioData';
+import { getProjects, resolveProject } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 const Projects = () => {
+  const { language, isRTL, t } = useLanguage();
+  const projects = getProjects(language);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const [isBuilderOpen, setIsBuilderOpen] = useState(false);
@@ -80,6 +83,17 @@ const Projects = () => {
   // Flagship project spotlight
   const flagshipProject = projects.find((p) => p.flagship) || projects[0];
 
+  const getCategoryLabel = (cat) => {
+    const key = cat.toLowerCase().replace(/[^a-z]/g, '');
+    if (key === 'all') return t('projects.categories.all', 'All');
+    if (key.includes('fullstack')) return t('projects.categories.fullStack', 'Full-Stack');
+    if (key.includes('flutter')) return t('projects.categories.flutter', 'Flutter');
+    if (key.includes('mobile')) return t('projects.categories.mobile', 'Mobile');
+    if (key.includes('web')) return t('projects.categories.web', 'Web');
+    if (key.includes('design')) return t('projects.categories.design', 'Design');
+    return cat;
+  };
+
   // Dynamically compute category tabs from active projects list
   const dynamicCategories = [
     "All",
@@ -101,13 +115,13 @@ const Projects = () => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 mb-3">
             <Sparkles size={13} />
-            Featured Work
+            {t('projects.featuredBadge', 'Featured System')}
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#1a3a5f] dark:text-blue-400 mb-4">
-            Production Systems & Projects
+            {t('projects.sectionTitle', 'Production Systems & Projects')}
           </h2>
           <p className="text-[#5d7d9e] dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
-            End-to-end architectures demonstrating cross-platform mobile interfaces, asynchronous APIs, and cloud databases.
+            {t('projects.sectionSubtitle', 'End-to-end architectures demonstrating cross-platform mobile interfaces, asynchronous APIs, and cloud databases.')}
           </p>
         </motion.div>
 
@@ -124,10 +138,10 @@ const Projects = () => {
               <div className="lg:col-span-6 space-y-6">
                 <div className="flex flex-wrap items-center gap-2.5">
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#1a3a5f] dark:bg-blue-600 text-white shadow-sm">
-                    Flagship Full-Stack System
+                    {t('projects.flagshipBadge', 'Flagship Full-Stack System')}
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
-                    Production Architecture
+                    {language === 'ar' ? 'معمارية إنتاج حية' : 'Production Architecture'}
                   </span>
                 </div>
 
@@ -143,7 +157,7 @@ const Projects = () => {
                 {flagshipProject.systemArchitecture && (
                   <div className="p-3 sm:p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-gray-800">
                     <span className="text-[11px] uppercase tracking-wider font-bold text-[#5d7d9e] dark:text-gray-400 block mb-2">
-                      End-to-End System Pipeline
+                      {language === 'ar' ? 'المسار البرمجي المتكامل للنظام' : 'End-to-End System Pipeline'}
                     </span>
                     <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1a3a5f] dark:text-blue-300">
                       <span className="p-1 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">
@@ -174,9 +188,23 @@ const Projects = () => {
                     onClick={() => handleSelectProject(flagshipProject)}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:opacity-95 transition-opacity text-center"
                   >
-                    View System Case Study & Architecture
-                    <ArrowRight size={16} />
+                    {language === 'ar' ? 'عرض دراسة الحالة والمعمارية البرمجية' : 'View System Case Study & Architecture'}
+                    <ArrowRight size={16} className="rtl:rotate-180" />
                   </motion.button>
+
+                  {flagshipProject.demoVideoUrl && (
+                    <motion.a
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      href={flagshipProject.demoVideoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 sm:px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:bg-indigo-700 transition-colors text-center"
+                    >
+                      <Play size={16} />
+                      {t('modal.watchVideo', 'Watch Video Walkthrough')}
+                    </motion.a>
+                  )}
 
                   {flagshipProject.githubUrl && (
                     <motion.a
@@ -188,7 +216,7 @@ const Projects = () => {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-5 py-3 rounded-xl text-sm font-bold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all text-center"
                     >
                       <Github size={16} />
-                      Showcase Repo
+                      {t('modal.viewRepo', 'Showcase Repo')}
                     </motion.a>
                   )}
                 </div>
@@ -281,7 +309,7 @@ const Projects = () => {
             {/* CATEGORY FILTER */}
             <div className="mb-10 text-center">
               <h3 className="text-xl font-bold text-[#1a3a5f] dark:text-gray-200 mb-6">
-                Explore All Engineering Projects
+                {t('projects.viewMoreProjects', 'Explore All Engineering Projects')}
               </h3>
 
               <div className="flex flex-wrap justify-center gap-3">
@@ -298,7 +326,7 @@ const Projects = () => {
                           : 'bg-[#e0e5ec] dark:bg-[#1c222d] text-[#5d7d9e] dark:text-gray-300 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed'
                         }`}
                     >
-                      {category}
+                      {getCategoryLabel(category)}
                     </motion.button>
                   );
                 })}
@@ -324,7 +352,7 @@ const Projects = () => {
             {/* Filter Empty state */}
             {filteredProjects.length === 0 && (
               <div className="text-center py-12 text-[#5d7d9e] dark:text-gray-400">
-                <p>No projects found in this category.</p>
+                <p>{language === 'ar' ? 'لا توجد مشاريع في هذا القسم حالياً.' : 'No projects found in this category.'}</p>
               </div>
             )}
           </>
@@ -369,7 +397,7 @@ const Projects = () => {
       {/* Interactive Recruiter Project Detail Modal */}
       {selectedProject && (
         <ProjectModal
-          project={selectedProject}
+          project={resolveProject(selectedProject, language)}
           onClose={handleCloseModal}
         />
       )}

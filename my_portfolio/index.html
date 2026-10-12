@@ -24,9 +24,10 @@
     <meta name="twitter:description" content="Explore full-stack SaaS platforms, WebAssembly browser tools, and cross-platform systems by Laith Muhammad." />
     <meta name="twitter:image" content="https://laithmh.github.io/my_portfolio/projects/b-insta-web.png" />
     
-    <!-- Google Fonts: Plus Jakarta Sans -->
+    <!-- Google Fonts: Plus Jakarta Sans & Cairo (Arabic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- GitHub Pages Single Page Apps Redirect Handler -->
     <script>
@@ -42,7 +43,7 @@
       }(window.location))
     </script>
 
-    <!-- Early Saved Theme Sync (Light mode is default) -->
+    <!-- Early Saved Theme & Language Sync -->
     <script>
       (function() {
         const saved = localStorage.getItem('theme');
@@ -50,6 +51,15 @@
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
+        }
+
+        const savedLang = localStorage.getItem('portfolio_lang');
+        if (savedLang === 'ar') {
+          document.documentElement.setAttribute('lang', 'ar');
+          document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+          document.documentElement.setAttribute('lang', 'en');
+          document.documentElement.setAttribute('dir', 'ltr');
         }
       })();
     </script>

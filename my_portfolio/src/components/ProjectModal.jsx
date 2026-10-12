@@ -17,6 +17,7 @@ import {
 import ProjectImage from './ProjectImage';
 import { resolveAssetPath } from '../utils/assetHelper';
 import { DualPhoneMockup, TabletFrame, TabletPhoneMockup } from './DeviceFrames';
+import { useLanguage } from '../context/LanguageContext';
 
 const isEmbedVideo = (url) => {
   if (!url) return false;
@@ -44,6 +45,7 @@ const getEmbedUrl = (url) => {
 };
 
 const ProjectModal = ({ project, onClose }) => {
+  const { language, isRTL, t } = useLanguage();
   const [activeMediaIdx, setActiveMediaIdx] = useState(0);
 
   // Prepare media list (fall back to main image if media array not present)
@@ -117,7 +119,7 @@ const ProjectModal = ({ project, onClose }) => {
               {project.firstProject && (
                 <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-sm flex items-center gap-1 flex-shrink-0">
                   <Sparkles size={12} />
-                  First Project
+                  {project.firstProjectBadge || t('projects.firstProjectBadge', 'First Project')}
                 </span>
               )}
               <h2 className="text-base sm:text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 truncate max-w-[130px] sm:max-w-md">
@@ -129,7 +131,7 @@ const ProjectModal = ({ project, onClose }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
-              aria-label="Close modal"
+              aria-label={t('modal.close', 'Close modal')}
               className="p-2 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-gray-600 dark:text-gray-300 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all flex-shrink-0"
             >
               <X size={20} />
@@ -255,14 +257,14 @@ const ProjectModal = ({ project, onClose }) => {
                     <button
                       onClick={() => setActiveMediaIdx((prev) => (prev - 1 + mediaList.length) % mediaList.length)}
                       className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors z-10"
-                      aria-label="Previous image"
+                      aria-label={t('modal.prevMedia', 'Previous image')}
                     >
                       <ChevronLeft size={20} />
                     </button>
                     <button
                       onClick={() => setActiveMediaIdx((prev) => (prev + 1) % mediaList.length)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors z-10"
-                      aria-label="Next image"
+                      aria-label={t('modal.nextMedia', 'Next image')}
                     >
                       <ChevronRight size={20} />
                     </button>
@@ -327,7 +329,7 @@ const ProjectModal = ({ project, onClose }) => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:opacity-90 transition-opacity text-center"
                   >
                     <Github size={16} />
-                    View Showcase Repo
+                    {t('modal.viewRepo', 'View Showcase Repo')}
                   </a>
                 )}
 
@@ -339,7 +341,7 @@ const ProjectModal = ({ project, onClose }) => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors text-center"
                   >
                     <Download size={16} />
-                    {project.downloadLabel || 'Download APK'}
+                    {project.downloadLabel || t('modal.downloadApk', 'Download APK')}
                   </a>
                 )}
 
@@ -351,7 +353,7 @@ const ProjectModal = ({ project, onClose }) => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-emerald-700 transition-colors text-center"
                   >
                     <ExternalLink size={16} />
-                    {project.liveUrlLabel || 'Open Live Demo'}
+                    {project.liveUrlLabel || t('modal.openLiveDemo', 'Open Live Demo')}
                   </a>
                 )}
 
@@ -363,7 +365,7 @@ const ProjectModal = ({ project, onClose }) => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-indigo-700 transition-colors text-center"
                   >
                     <Play size={16} />
-                    Watch Video Walkthrough
+                    {t('modal.watchVideo', 'Watch Video Walkthrough')}
                   </a>
                 )}
               </div>
@@ -372,14 +374,14 @@ const ProjectModal = ({ project, onClose }) => {
               {project.repoNote && (
                 <div className="w-full p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/60 dark:border-blue-900/60 text-xs text-blue-900 dark:text-blue-300 flex items-start gap-2">
                   <ShieldCheck size={16} className="text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span><strong>Showcase Notice:</strong> {project.repoNote}</span>
+                  <span><strong>{t('modal.showcaseNotice', 'Showcase Notice:')}</strong> {project.repoNote}</span>
                 </div>
               )}
             </div>
 
             {/* Hero Statement */}
             {project.caseStudy?.heroStatement && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-amber-500/10 border-l-4 border-amber-500 dark:border-amber-400 text-[#1a3a5f] dark:text-gray-100 font-medium text-sm sm:text-base leading-relaxed italic shadow-sm">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-amber-500/10 border-l-4 rtl:border-l-0 rtl:border-r-4 border-amber-500 dark:border-amber-400 text-[#1a3a5f] dark:text-gray-100 font-medium text-sm sm:text-base leading-relaxed italic shadow-sm">
                 "{project.caseStudy.heroStatement}"
               </div>
             )}
@@ -388,10 +390,10 @@ const ProjectModal = ({ project, onClose }) => {
             <div>
               <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-2 flex items-center gap-2">
                 <Sparkles size={18} className="text-blue-500" />
-                Project Overview
+                {t('modal.projectOverview', 'Project Overview')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-                {project.caseStudy?.overview || project.description || 'No detailed overview provided yet.'}
+                {project.caseStudy?.overview || project.description || t('modal.emptyOverview', 'No detailed overview provided yet.')}
               </p>
             </div>
 
@@ -400,7 +402,7 @@ const ProjectModal = ({ project, onClose }) => {
               <div>
                 <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-3 flex items-center gap-2">
                   <CheckCircle2 size={18} className="text-emerald-500" />
-                  Key Features & Highlights
+                  {t('modal.keyFeatures', 'Key Features & Highlights')}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-2.5">
                   {project.caseStudy.keyFeatures.map((feat, idx) => (
@@ -421,7 +423,7 @@ const ProjectModal = ({ project, onClose }) => {
               <div>
                 <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-3 flex items-center gap-2">
                   <Layers size={18} className="text-indigo-500" />
-                  Architecture & Engineering
+                  {t('modal.architecture', 'Architecture & Engineering')}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {Object.entries(project.caseStudy.architecture).map(([key, val]) => (
@@ -446,19 +448,19 @@ const ProjectModal = ({ project, onClose }) => {
               <div>
                 <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-3 flex items-center gap-2">
                   <ShieldCheck size={18} className="text-amber-500" />
-                  Challenges & Technical Solutions
+                  {t('modal.challengesSolutions', 'Challenges & Technical Solutions')}
                 </h3>
                 <div className="space-y-3">
                   {project.caseStudy.challengesAndSolutions.map((cs, idx) => (
                     <div
                       key={idx}
-                      className="p-4 rounded-xl bg-white/50 dark:bg-white/5 border-l-4 border-amber-500 text-sm space-y-1.5"
+                      className="p-4 rounded-xl bg-white/50 dark:bg-white/5 border-l-4 rtl:border-l-0 rtl:border-r-4 border-amber-500 text-sm space-y-1.5"
                     >
                       <p className="font-semibold text-gray-800 dark:text-gray-200">
-                        <span className="text-amber-600 dark:text-amber-400 font-bold">Challenge:</span> {cs.challenge}
+                        <span className="text-amber-600 dark:text-amber-400 font-bold">{t('modal.challengeLabel', 'Challenge:')}</span> {cs.challenge}
                       </p>
                       <p className="text-gray-600 dark:text-gray-300">
-                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">Solution:</span> {cs.solution}
+                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">{t('modal.solutionLabel', 'Solution:')}</span> {cs.solution}
                       </p>
                     </div>
                   ))}
@@ -471,7 +473,7 @@ const ProjectModal = ({ project, onClose }) => {
               <div>
                 <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-3 flex items-center gap-2">
                   <Award size={18} className="text-blue-500" />
-                  Results & Production Engineering Metrics
+                  {t('modal.resultsMetrics', 'Results & Production Engineering Metrics')}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-2.5">
                   {project.caseStudy.metrics.map((metric, idx) => (
@@ -491,7 +493,7 @@ const ProjectModal = ({ project, onClose }) => {
             {techStack.length > 0 && (
               <div>
                 <h3 className="text-xs uppercase font-bold text-[#5d7d9e] dark:text-gray-400 mb-2.5">
-                  Technologies & Tools Used
+                  {t('modal.techUsed', 'Technologies & Tools Used')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {techStack.map((t, idx) => (

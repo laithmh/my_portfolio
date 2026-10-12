@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon, Download } from 'lucide-react';
 import ProjectImage from './ProjectImage';
 import { resolveAssetPath } from '../utils/assetHelper';
+import { useLanguage } from '../context/LanguageContext';
 
 const ProjectCard = ({ project, onSelect }) => {
   if (!project) return null;
 
+  const { isRTL, t } = useLanguage();
   const mediaList = project.media || [];
   const hasVideo = mediaList.some((m) => m?.type === 'video') || Boolean(project.demoVideoUrl);
   const imageCount = mediaList.filter((m) => m?.type === 'image').length || 1;
@@ -179,7 +181,7 @@ const ProjectCard = ({ project, onSelect }) => {
             </span>
           </div>
 
-          <div className="absolute top-3 right-3 bg-black/65 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full z-10">
+          <div className="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-black/65 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full z-10">
             {category}
           </div>
         </div>
@@ -202,7 +204,7 @@ const ProjectCard = ({ project, onSelect }) => {
             </h3>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 leading-relaxed">
-            {project.description || 'Click to view project details and architecture overview.'}
+            {project.description || t('modal.emptyDescription', 'Click to view project details and architecture overview.')}
           </p>
 
           {/* Tech Stack Badges */}
@@ -226,8 +228,8 @@ const ProjectCard = ({ project, onSelect }) => {
 
       {/* Card Footer Actions */}
       <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-gray-300/30 dark:border-gray-800">
-        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1a3a5f] dark:text-blue-400 group-hover:translate-x-1 transition-transform">
-          View Case Study <ArrowRight size={14} />
+        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1a3a5f] dark:text-blue-400 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">
+          {t('projects.viewCaseStudy', 'View Case Study')} <ArrowRight size={14} className="rtl:rotate-180" />
         </span>
 
         {/* External Quick Links */}

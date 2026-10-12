@@ -2,7 +2,8 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, FolderGit2, Send, FileDown, Github, Terminal, Layers } from 'lucide-react';
 import RiveAnimation from './RiveAnimation';
-import { personalInfo } from '../data/portfolioData';
+import { getPersonalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 const floatAnimation = {
   animate: {
@@ -17,6 +18,8 @@ const floatAnimation = {
 };
 
 const Hero = ({ scrollToSection }) => {
+  const { language, t } = useLanguage();
+  const personalInfo = getPersonalInfo(language);
   const baseUrl = import.meta.env.BASE_URL || '/';
   const resumePath = `${baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`}${personalInfo.resumeFile}`;
 
@@ -112,7 +115,7 @@ const Hero = ({ scrollToSection }) => {
             className="flex flex-wrap justify-center items-center gap-2 max-w-2xl mb-10"
           >
             <span className="text-xs uppercase tracking-wider font-bold text-[#5d7d9e] dark:text-gray-400 mr-1 flex items-center gap-1">
-              <Layers size={13} /> Stack:
+              <Layers size={13} /> {t('hero.stackLabel', 'Stack:')}
             </span>
             {coreStackPills.map((tech) => (
               <span
@@ -138,7 +141,7 @@ const Hero = ({ scrollToSection }) => {
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white px-7 py-3 rounded-xl font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-all"
             >
               <FolderGit2 size={18} />
-              Explore Systems & Apps
+              {t('hero.exploreCta', 'Explore Systems & Apps')}
             </motion.button>
 
             <motion.a
@@ -151,7 +154,7 @@ const Hero = ({ scrollToSection }) => {
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               <FileDown size={18} />
-              Download CV
+              {t('hero.downloadCvCta', 'Download CV')}
             </motion.a>
 
             <motion.button
@@ -161,7 +164,7 @@ const Hero = ({ scrollToSection }) => {
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               <Send size={18} />
-              Get In Touch
+              {t('hero.contactCta', 'Get In Touch')}
             </motion.button>
           </motion.div>
 

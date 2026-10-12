@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Copy, Check, ExternalLink, Github, Instagram, Facebook, Linkedin } from 'lucide-react';
 import { personalInfo, socialLinks } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 const getSocialIcon = (platform) => {
   switch (platform) {
@@ -20,6 +21,7 @@ const getSocialIcon = (platform) => {
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const handleCopyEmail = async () => {
     try {
@@ -41,10 +43,10 @@ const Contact = () => {
           className="mb-12"
         >
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#1a3a5f] dark:text-blue-400 mb-4">
-            Let's Create Together
+            {t('contact.sectionTitle', "Let's Create Together")}
           </h2>
           <p className="text-[#5d7d9e] dark:text-gray-400 max-w-xl mx-auto text-base sm:text-lg">
-            Have an app idea, a freelance inquiry, or want to collaborate on something amazing? I'd love to hear from you.
+            {t('contact.sectionSubtitle', "Have an app idea, a freelance inquiry, or want to collaborate on something amazing? I'd love to hear from you.")}
           </p>
         </motion.div>
 
@@ -60,7 +62,7 @@ const Contact = () => {
           </div>
 
           <p className="text-xs uppercase tracking-wider font-bold text-[#5d7d9e] dark:text-gray-400 mb-2">
-            Direct Email
+            {t('contact.directEmail', 'Direct Email')}
           </p>
 
           <a
@@ -77,7 +79,7 @@ const Contact = () => {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a5f] dark:bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:opacity-95 transition-opacity"
             >
               <Mail size={16} />
-              Open Email App
+              {t('contact.openEmailApp', 'Open Email App')}
             </a>
 
             <motion.button
@@ -88,12 +90,12 @@ const Contact = () => {
               {copied ? (
                 <>
                   <Check size={16} className="text-emerald-500" />
-                  <span className="text-emerald-600 dark:text-emerald-400">Copied!</span>
+                  <span className="text-emerald-600 dark:text-emerald-400">{t('contact.copied', 'Copied!')}</span>
                 </>
               ) : (
                 <>
                   <Copy size={16} />
-                  <span>Copy Email</span>
+                  <span>{t('contact.copyEmail', 'Copy Email')}</span>
                 </>
               )}
             </motion.button>

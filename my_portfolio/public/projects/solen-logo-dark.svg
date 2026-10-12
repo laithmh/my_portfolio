@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
+  <!-- SOL (Sun): Left Solid Semicircle in Warm Gold -->
+  <path
+    d="M 96 20
+       A 75 75 0 0 0 96 170
+       Z"
+    fill="#C8A46A"
+  />
+
+  <!-- SELENE (Moon): Right Crescent Ring in Warm Parchment -->
+  <path
+    d="M 104 20
+       A 75 75 0 0 1 104 170
+       L 104 144
+       A 49 49 0 0 0 104 46
+       Z"
+    fill="#F4EFE8"
+  />
+
+  <!-- SOLEN Wordmark in Warm Parchment -->
+  <text
+    x="100"
+    y="215"
+    text-anchor="middle"
+    fill="#F4EFE8"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="800"
+    font-size="24"
+    letter-spacing="0.28em"
+  >
+    SOLEN
+  </text>
+</svg>

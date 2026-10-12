@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, FileDown } from 'lucide-react';
+import { Sun, Moon, Menu, X, FileDown, Languages } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', labelKey: 'nav.home' },
+    { id: 'projects', labelKey: 'nav.projects' },
+    { id: 'skills', labelKey: 'nav.skills' },
+    { id: 'experience', labelKey: 'nav.experience' },
+    { id: 'about', labelKey: 'nav.about' },
+    { id: 'contact', labelKey: 'nav.contact' }
   ];
 
   const baseUrl = import.meta.env.BASE_URL || '/';
@@ -37,7 +39,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -51,7 +53,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
                       : 'text-[#5d7d9e] dark:text-gray-400 hover:text-[#1a3a5f] dark:hover:text-gray-200'
                   }`}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                   {isActive && (
                     <motion.div
                       layoutId="activeSection"
@@ -65,14 +67,28 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
             })}
           </div>
 
-          {/* Right Actions: Theme Toggle + Resume + Mobile Hamburger */}
-          <div className="flex items-center space-x-3">
+          {/* Right Actions: Language Toggle + Theme Toggle + Resume + Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Language Switcher Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleLanguage}
+              aria-label={t('nav.toggleLanguage', 'Switch Language')}
+              title={t('nav.toggleLanguage', 'Switch Language')}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 font-bold text-xs shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+            >
+              <Languages size={15} className="text-blue-500" />
+              <span>{language === 'en' ? 'عربي' : 'EN'}</span>
+            </motion.button>
+
             {/* Theme Toggle Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={toggleTheme}
-              aria-label="Toggle Theme"
+              aria-label={t('nav.toggleTheme', 'Toggle Theme')}
+              title={t('nav.toggleTheme', 'Toggle Theme')}
               className="p-2.5 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-yellow-400 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -86,10 +102,10 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
               download="Laith_Mohammed_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-4 py-2 rounded-xl text-sm font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
+              className="flex items-center gap-1.5 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-3 sm:px-4 py-2 rounded-xl text-sm font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
             >
               <FileDown size={16} />
-              <span className="hidden sm:inline">Resume</span>
+              <span className="hidden sm:inline">{t('nav.resume', 'Resume')}</span>
             </motion.a>
 
             {/* Mobile Hamburger Button */}
@@ -98,7 +114,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
                 whileTap={{ scale: 0.95 }}
                 type="button"
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                aria-label="Toggle Menu"
+                aria-label={t('nav.toggleMenu', 'Toggle Menu')}
                 className="p-2.5 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -135,17 +151,29 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
                     key={item.id}
                     type="button"
                     onClick={() => handleNavClick(item.id)}
-                    className={`text-left px-4 py-3 rounded-xl text-base font-semibold transition-all ${
+                    className={`text-start px-4 py-3 rounded-xl text-base font-semibold transition-all ${
                       activeSection === item.id
                         ? 'bg-[#1a3a5f] text-white dark:bg-blue-600 shadow-sm'
                         : 'text-[#1a3a5f] dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/5'
                     }`}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 ))}
 
-                <div className="pt-2 border-t border-gray-300/50 dark:border-gray-800">
+                <div className="pt-2 border-t border-gray-300/50 dark:border-gray-800 flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      toggleLanguage();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold bg-white/60 dark:bg-white/10 text-[#1a3a5f] dark:text-blue-300 shadow-sm"
+                  >
+                    <Languages size={17} className="text-blue-500" />
+                    <span>{language === 'en' ? 'التحويل إلى العربية' : 'Switch to English'}</span>
+                  </button>
+
                   <a
                     href={resumePath}
                     download="Laith_Mohammed_Resume.pdf"
@@ -155,7 +183,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
                     className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold bg-[#1a3a5f] text-white dark:bg-blue-600 shadow-md"
                   >
                     <FileDown size={18} />
-                    Download CV / Resume
+                    {t('nav.downloadResume', 'Download CV / Resume')}
                   </a>
                 </div>
               </div>

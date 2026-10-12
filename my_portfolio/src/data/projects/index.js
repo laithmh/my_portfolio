@@ -30,4 +30,39 @@ export const loadAllProjects = () => {
 };
 
 export const allProjects = loadAllProjects();
+
+/**
+ * Resolves a single project object for a given locale (en or ar)
+ */
+export const resolveProject = (project, lang = 'en') => {
+  if (!project) return null;
+  if (lang === 'ar' && project.ar) {
+    const ar = project.ar;
+    return {
+      ...project,
+      title: ar.title || project.title,
+      tagline: ar.tagline || project.tagline,
+      category: ar.category || project.category,
+      description: ar.description || project.description,
+      systemArchitecture: ar.systemArchitecture || project.systemArchitecture,
+      repoNote: ar.repoNote || project.repoNote,
+      downloadLabel: ar.downloadLabel || project.downloadLabel,
+      liveUrlLabel: ar.liveUrlLabel || project.liveUrlLabel,
+      firstProjectBadge: ar.firstProjectBadge || project.firstProjectBadge,
+      caseStudy: {
+        ...(project.caseStudy || {}),
+        ...(ar.caseStudy || {}),
+      },
+    };
+  }
+  return project;
+};
+
+/**
+ * Returns all active projects localized for the given language
+ */
+export const getProjects = (lang = 'en') => {
+  return allProjects.map((p) => resolveProject(p, lang));
+};
+
 export default allProjects;

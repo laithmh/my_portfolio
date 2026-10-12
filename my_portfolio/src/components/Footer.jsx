@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { personalInfo } from '../data/portfolioData';
+import { getPersonalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer = ({ scrollToSection }) => {
   const [clickCount, setClickCount] = useState(0);
+  const { language, t } = useLanguage();
+  const personalInfo = getPersonalInfo(language);
 
   const handleSecretClick = () => {
     const next = clickCount + 1;
@@ -29,18 +32,19 @@ const Footer = ({ scrollToSection }) => {
             ©
           </span>{' '}
           {new Date().getFullYear()}{' '}
-          <span className="font-semibold text-[#1a3a5f] dark:text-gray-200">{personalInfo.name}</span>. All rights reserved.
+          <span className="font-semibold text-[#1a3a5f] dark:text-gray-200">{personalInfo.name}</span>. {t('footer.rightsReserved', 'All rights reserved.')}
         </p>
 
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Crafted with React 19, Tailwind CSS & Framer Motion
+          {t('footer.craftedWith', 'Crafted with React 19, Tailwind CSS & Framer Motion')}
         </p>
 
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => scrollToSection('home')}
-          aria-label="Scroll to top"
+          aria-label={t('footer.scrollToTop', 'Scroll to top')}
+          title={t('footer.scrollToTop', 'Scroll to top')}
           className="p-2.5 rounded-xl bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-gray-200 shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
         >
           <ArrowUp size={16} />

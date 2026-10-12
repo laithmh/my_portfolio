@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <style>
+    .solen-sun { fill: #C8A46A; }
+    .solen-moon { fill: #2C2A2A; transition: fill 0.2s ease; }
+    @media (prefers-color-scheme: dark) {
+      .solen-moon { fill: #F4EFE8; }
+    }
+  </style>
+
+  <!-- SOL (Sun): Left Solid Semicircle -->
+  <path
+    d="M 96 20
+       A 80 80 0 0 0 96 180
+       Z"
+    class="solen-sun"
+  />
+
+  <!-- SELENE (Moon): Right Crescent Ring -->
+  <path
+    d="M 104 20
+       A 80 80 0 0 1 104 180
+       L 104 152
+       A 52 52 0 0 0 104 48
+       Z"
+    class="solen-moon"
+  />
+</svg>
