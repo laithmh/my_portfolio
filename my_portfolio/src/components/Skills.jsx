@@ -5,15 +5,16 @@ import { getSkillTiers } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
 const getTierIcon = (index) => {
+  const iconClass = "text-blue-600 dark:text-blue-400";
   switch (index) {
     case 0:
-      return <Globe size={22} className="text-blue-500" />;
+      return <Globe size={22} className={iconClass} />;
     case 1:
-      return <Smartphone size={22} className="text-emerald-500" />;
+      return <Smartphone size={22} className={iconClass} />;
     case 2:
-      return <Database size={22} className="text-purple-500" />;
+      return <Database size={22} className={iconClass} />;
     default:
-      return <Palette size={22} className="text-amber-500" />;
+      return <Palette size={22} className={iconClass} />;
   }
 };
 

@@ -40,10 +40,17 @@ const Experience = () => {
 
               <div className="bg-[#e0e5ec] dark:bg-[#1c222d] rounded-2xl p-4 sm:p-7 shadow-neu-flat dark:shadow-neu-dark-flat transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
-                    <Calendar size={13} />
-                    {item.period}
-                  </span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
+                      <Calendar size={13} />
+                      {item.period}
+                    </span>
+                    {item.badge && (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
                     {item.company}
                   </span>

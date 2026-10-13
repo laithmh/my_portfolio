@@ -18,7 +18,7 @@ const floatAnimation = {
 };
 
 const Hero = ({ scrollToSection }) => {
-  const { language, t } = useLanguage();
+  const { language, isRTL, t } = useLanguage();
   const personalInfo = getPersonalInfo(language);
   const baseUrl = import.meta.env.BASE_URL || '/';
   const resumePath = `${baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`}${personalInfo.resumeFile}`;
@@ -56,9 +56,6 @@ const Hero = ({ scrollToSection }) => {
             whileTap={{ scale: 0.96 }}
             className="relative mb-8 mt-2 flex justify-center p-3 cursor-pointer select-none group"
           >
-            {/* Ambient Cosmic Glow behind Moon */}
-            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-blue-500/25 via-indigo-500/20 to-purple-500/25 blur-2xl opacity-70 dark:opacity-50 pointer-events-none group-hover:opacity-100 transition-opacity duration-500" />
-
             <div className="relative bg-[#e0e5ec] dark:bg-[#1c222d] w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full shadow-neu-flat dark:shadow-neu-dark-flat overflow-hidden flex items-center justify-center transition-colors duration-300 border-2 border-white/70 dark:border-gray-800/80">
               <RiveAnimation />
             </div>
@@ -75,10 +72,14 @@ const Hero = ({ scrollToSection }) => {
             <span>{personalInfo.location}</span>
           </motion.div>
 
-          {/* Name Headline */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-3 bg-gradient-to-r from-[#1a3a5f] via-[#2c5282] to-[#5d7d9e] dark:from-blue-200 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
-            {personalInfo.name}
-          </h1>
+          {/* Name Headline with unclipped padding for Arabic and English */}
+          <div className="w-full flex justify-center overflow-visible">
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 text-[#1a3a5f] dark:text-gray-100 inline-block py-2.5 sm:py-3 px-3 sm:px-6 overflow-visible leading-[1.3] sm:leading-[1.2] ${
+              isRTL ? 'tracking-normal font-sans' : 'tracking-tight'
+            }`}>
+              {personalInfo.name}
+            </h1>
+          </div>
 
           {/* Full-Stack Engineer Title & Core Focus */}
           <motion.div
@@ -88,7 +89,7 @@ const Hero = ({ scrollToSection }) => {
             className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 mb-4"
           >
             <div className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-[#1a3a5f] dark:text-blue-300">
-              <Terminal size={22} className="text-blue-500" />
+              <Terminal size={22} className="text-blue-600 dark:text-blue-400" />
               <span>{personalInfo.role}</span>
             </div>
             <span className="text-gray-400 font-normal hidden sm:inline">•</span>
@@ -148,7 +149,7 @@ const Hero = ({ scrollToSection }) => {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               href={resumePath}
-              download="Laith_Mohammed_Resume.pdf"
+              download="Laith_Muhammed_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-6 py-3 rounded-xl font-semibold shadow-neu-flat dark:shadow-neu-dark-flat hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"

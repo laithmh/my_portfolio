@@ -11,6 +11,8 @@ export default {
   order: 1,
   featured: true,
   flagship: true,
+  statusBadge: "Live • Pre-Launch",
+  statusBadgeAr: "مشروع حي • ما قبل الإطلاق",
   mockup: "dual",
 
   description: "A turnkey B2B2C Print-on-Demand platform empowering Iraqi creators and streetwear brands to customize garments and launch branded storefronts with zero upfront capital — featuring an in-browser 2D design studio, server-side 300 DPI transparent DTF export, localized Cash on Delivery (COD) across all 18 governorates, and zero-float financial clearance.",

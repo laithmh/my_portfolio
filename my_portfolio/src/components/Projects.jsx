@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, Github, ExternalLink, Play, Layers, Server, Smartphone, Database, Plus } from 'lucide-react';
+import { ArrowRight, Github, ExternalLink, Play, Layers, Server, Smartphone, Database, Plus, FolderGit2 } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import ProjectImage from './ProjectImage';
@@ -114,7 +114,7 @@ const Projects = () => {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 mb-3">
-            <Sparkles size={13} />
+            <FolderGit2 size={13} />
             {t('projects.featuredBadge', 'Featured System')}
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#1a3a5f] dark:text-blue-400 mb-4">
@@ -199,7 +199,7 @@ const Projects = () => {
                       href={flagshipProject.demoVideoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 sm:px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:bg-indigo-700 transition-colors text-center"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-xl text-sm font-bold shadow-md hover:bg-blue-700 transition-colors text-center"
                     >
                       <Play size={16} />
                       {t('modal.watchVideo', 'Watch Video Walkthrough')}
@@ -364,7 +364,7 @@ const Projects = () => {
             className="text-center py-16 px-6 max-w-xl mx-auto rounded-3xl bg-[#e0e5ec] dark:bg-[#1c222d] shadow-neu-flat dark:shadow-neu-dark-flat border border-white/40 dark:border-gray-800"
           >
             <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-inner">
-              <Sparkles size={32} />
+              <FolderGit2 size={32} />
             </div>
             <h3 className="text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 mb-3">
               Case Studies & Demos Incoming

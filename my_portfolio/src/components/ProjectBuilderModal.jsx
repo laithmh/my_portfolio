@@ -5,7 +5,7 @@ import {
   Download,
   Copy,
   Check,
-  Sparkles,
+  FolderGit2,
   Plus,
   Trash2,
   Eye,
@@ -22,10 +22,15 @@ import {
   KeyRound,
   ShieldCheck,
   ShieldAlert,
-  Delete
+  Delete,
+  Video,
+  Youtube,
+  Instagram,
+  Film
 } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
+import { defaultCreativeVideos } from '../data/portfolioData';
 
 const DEFAULT_PIN = "2026";
 
@@ -146,19 +151,54 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
   const [changePinMsg, setChangePinMsg] = useState({ text: '', isError: false });
 
   const [project, setProject] = useState(DEFAULT_PROJECT);
-  const [activeTab, setActiveTab] = useState('form'); // 'form' | 'preview' | 'code'
+  const [activeTab, setActiveTab] = useState('form'); // 'form' | 'preview' | 'code' | 'videos'
   const [techInput, setTechInput] = useState('');
   const [featureInput, setFeatureInput] = useState('');
   const [copied, setCopied] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
 
+  // Creative Media / Video Manager State
+  const [videoList, setVideoList] = useState(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('portfolio_creative_videos');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+    }
+    return defaultCreativeVideos;
+  });
+  const [editingVideo, setEditingVideo] = useState({
+    id: '',
+    title: '',
+    titleAr: '',
+    platform: 'youtube',
+    url: '',
+    category: 'Product Demo',
+    categoryAr: 'عرض تجريبي',
+    caption: '',
+    captionAr: ''
+  });
+  const [videoSavedMsg, setVideoSavedMsg] = useState(false);
+
   const getAdminPin = () => localStorage.getItem('portfolio_admin_pin') || DEFAULT_PIN;
 
-  // Lock body scroll when modal is open
+  // Lock body scroll when modal is open and reload stored videos
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      try {
+        const stored = localStorage.getItem('portfolio_creative_videos');
+        if (stored !== null) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) {
+            setVideoList(parsed);
+          }
+        }
+      } catch (e) {}
     } else {
       document.body.style.overflow = '';
       setPinInput('');
@@ -345,6 +385,63 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
 
     setDownloaded(true);
     setTimeout(() => setDownloaded(false), 3000);
+  };
+
+  const handleSaveVideo = (e) => {
+    e.preventDefault();
+    if (!editingVideo.url || !editingVideo.title) return;
+    const id = editingVideo.id || 'vid-' + Date.now();
+    const videoData = { ...editingVideo, id };
+    const updated = editingVideo.id
+      ? videoList.map((v) => (v.id === editingVideo.id ? videoData : v))
+      : [...videoList, videoData];
+    setVideoList(updated);
+    localStorage.setItem('portfolio_creative_videos', JSON.stringify(updated));
+    window.dispatchEvent(new Event('portfolio_videos_updated'));
+    setEditingVideo({
+      id: '',
+      title: '',
+      titleAr: '',
+      platform: 'youtube',
+      url: '',
+      category: 'Product Demo',
+      categoryAr: 'عرض تجريبي',
+      caption: '',
+      captionAr: ''
+    });
+    setVideoSavedMsg(true);
+    setTimeout(() => setVideoSavedMsg(false), 2500);
+  };
+
+  const handleEditVideo = (vid) => {
+    setEditingVideo(vid);
+    setActiveTab('videos');
+  };
+
+  const handleDeleteVideo = (id) => {
+    const updated = videoList.filter((v) => v.id !== id);
+    setVideoList(updated);
+    localStorage.setItem('portfolio_creative_videos', JSON.stringify(updated));
+    window.dispatchEvent(new Event('portfolio_videos_updated'));
+    setVideoSavedMsg(true);
+    setTimeout(() => setVideoSavedMsg(false), 2500);
+  };
+
+  const handleSaveAllVideos = () => {
+    localStorage.setItem('portfolio_creative_videos', JSON.stringify(videoList));
+    window.dispatchEvent(new Event('portfolio_videos_updated'));
+    setVideoSavedMsg(true);
+    setTimeout(() => setVideoSavedMsg(false), 2500);
+  };
+
+  const handleResetVideos = () => {
+    if (window.confirm('Clear all videos from live showcase?')) {
+      localStorage.setItem('portfolio_creative_videos', JSON.stringify([]));
+      setVideoList([]);
+      window.dispatchEvent(new Event('portfolio_videos_updated'));
+      setVideoSavedMsg(true);
+      setTimeout(() => setVideoSavedMsg(false), 2500);
+    }
   };
 
   const jsCode = generateJsContent(project);
@@ -554,6 +651,17 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
                   <Code2 size={14} />
                   Code
                 </button>
+                <button
+                  onClick={() => setActiveTab('videos')}
+                  className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                    activeTab === 'videos'
+                      ? 'bg-[#1a3a5f] text-white dark:bg-blue-600 shadow-sm'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-300/50 dark:hover:bg-gray-800'
+                  }`}
+                >
+                  <Film size={14} />
+                  Videos & Reels
+                </button>
               </div>
 
               {/* Quick Export Actions */}
@@ -588,7 +696,7 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
                   {/* Section 1: Basic Metadata */}
                   <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-300/40 dark:border-gray-800 space-y-4 shadow-sm">
                     <h3 className="text-sm font-bold uppercase tracking-wider text-[#1a3a5f] dark:text-blue-400 flex items-center gap-2">
-                      <Sparkles size={16} />
+                      <FolderGit2 size={16} />
                       1. Basic Information
                     </h3>
 
@@ -601,7 +709,7 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
                           type="text"
                           value={project.title}
                           onChange={(e) => handleTitleChange(e.target.value)}
-                          placeholder="e.g. HealthTrack AI"
+                          placeholder="e.g. Solen Marketplace"
                           className="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
@@ -927,7 +1035,7 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
                   {/* Section 5: Case Study Deep-Dive */}
                   <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-300/40 dark:border-gray-800 space-y-4 shadow-sm">
                     <h3 className="text-sm font-bold uppercase tracking-wider text-[#1a3a5f] dark:text-blue-400 flex items-center gap-2">
-                      <Sparkles size={16} />
+                      <FileCode size={16} />
                       5. Case Study & Architecture Overview
                     </h3>
 
@@ -1193,6 +1301,272 @@ const ProjectBuilderModal = ({ isOpen, onClose }) => {
                     <pre className="p-4 text-xs font-mono text-gray-200 overflow-x-auto leading-relaxed max-h-[500px]">
                       <code>{jsCode}</code>
                     </pre>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 4: VIDEOS & REELS MANAGER */}
+              {activeTab === 'videos' && (
+                <div className="space-y-8 max-w-4xl mx-auto">
+                  {/* Top Intro & Save/Clear Buttons */}
+                  <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-300/40 dark:border-gray-800 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+                    <div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-[#1a3a5f] dark:text-blue-400 flex items-center gap-2">
+                        <Film size={16} />
+                        Creative Media &amp; Video Manager
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        Add and manage your YouTube and Instagram video links. Changes are saved directly to your live portfolio!
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handleSaveAllVideos}
+                        className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm flex items-center gap-1.5 transition-all"
+                      >
+                        <Check size={14} />
+                        Save to Portfolio
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleResetVideos}
+                        className="px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 border border-gray-300/40 dark:border-gray-800 transition-colors"
+                      >
+                        Clear All
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Toast Alert Banner if saved */}
+                  {videoSavedMsg && (
+                    <div className="p-3.5 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-200 border border-emerald-500/40 text-xs font-bold flex items-center gap-2 shadow-sm animate-fadeIn">
+                      <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>Changes saved successfully! Your portfolio has been updated in real time.</span>
+                    </div>
+                  )}
+
+                  {/* Add / Edit Video Form */}
+                  <form onSubmit={handleSaveVideo} className="p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-300/40 dark:border-gray-800 space-y-4 shadow-sm">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#1a3a5f] dark:text-gray-200 flex items-center gap-2">
+                      <Plus size={14} className="text-blue-500" />
+                      {editingVideo.id ? 'Edit Video Details' : 'Add New Video / Reel'}
+                    </h4>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {/* Platform */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Platform *
+                        </label>
+                        <select
+                          value={editingVideo.platform}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, platform: e.target.value })}
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        >
+                          <option value="youtube">YouTube / YouTube Shorts</option>
+                          <option value="instagram">Instagram Reel / Post</option>
+                        </select>
+                      </div>
+
+                      {/* URL */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Video URL *
+                        </label>
+                        <input
+                          type="url"
+                          required
+                          value={editingVideo.url}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, url: e.target.value })}
+                          placeholder="https://youtube.com/shorts/... or https://instagram.com/reel/..."
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+
+                      {/* English Title */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Title (English) *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={editingVideo.title}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, title: e.target.value })}
+                          placeholder="e.g. DaVinci Resolve Motion Design Reel"
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+
+                      {/* Arabic Title */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Title (Arabic)
+                        </label>
+                        <input
+                          type="text"
+                          dir="rtl"
+                          value={editingVideo.titleAr}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, titleAr: e.target.value })}
+                          placeholder="مثال: موشن جرافيك في DaVinci Resolve"
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+
+                      {/* Category */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Category Badge
+                        </label>
+                        <input
+                          type="text"
+                          value={editingVideo.category}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, category: e.target.value })}
+                          placeholder="Product Demo, Motion Design, Mobile Filming..."
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+
+                      {/* Arabic Category */}
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Category Badge (Arabic)
+                        </label>
+                        <input
+                          type="text"
+                          dir="rtl"
+                          value={editingVideo.categoryAr}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, categoryAr: e.target.value })}
+                          placeholder="عرض تجريبي، موشن جرافيك..."
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Captions */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Caption / Subtitle (English)
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={editingVideo.caption}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, caption: e.target.value })}
+                          placeholder="Brief description of the reel or walkthrough..."
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                          Caption / Subtitle (Arabic)
+                        </label>
+                        <textarea
+                          rows={2}
+                          dir="rtl"
+                          value={editingVideo.captionAr}
+                          onChange={(e) => setEditingVideo({ ...editingVideo, captionAr: e.target.value })}
+                          placeholder="وصف موجز للمقطع المرئي..."
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Submit Bar */}
+                    <div className="flex items-center justify-between pt-2">
+                      {videoSavedMsg ? (
+                        <span className="text-xs font-bold text-emerald-500 flex items-center gap-1">
+                          <Check size={14} /> Saved and updated on portfolio!
+                        </span>
+                      ) : <span />}
+
+                      <div className="flex items-center gap-2">
+                        {editingVideo.id && (
+                          <button
+                            type="button"
+                            onClick={() => setEditingVideo({
+                              id: '',
+                              title: '',
+                              titleAr: '',
+                              platform: 'youtube',
+                              url: '',
+                              category: 'Product Demo',
+                              categoryAr: 'عرض تجريبي',
+                              caption: '',
+                              captionAr: ''
+                            })}
+                            className="px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg"
+                          >
+                            Cancel Edit
+                          </button>
+                        )}
+                        <button
+                          type="submit"
+                          className="px-4 py-2 text-xs font-bold text-white bg-[#1a3a5f] dark:bg-blue-600 rounded-xl shadow-md hover:opacity-95 transition-all flex items-center gap-1.5"
+                        >
+                          <Check size={14} />
+                          <span>{editingVideo.id ? 'Update Video' : 'Save & Publish Video'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+
+                  {/* Existing Videos List */}
+                  <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-300/40 dark:border-gray-800 space-y-3 shadow-sm">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#1a3a5f] dark:text-gray-200 mb-2">
+                      Current Published Videos ({videoList.length})
+                    </h4>
+
+                    <div className="divide-y divide-gray-200/60 dark:divide-gray-800">
+                      {videoList.map((item, idx) => (
+                        <div key={item.id || idx} className="py-3 flex items-center justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap mb-1">
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 capitalize flex items-center gap-1">
+                                {item.platform === 'youtube' && <Youtube size={12} className="text-red-500" />}
+                                {item.platform === 'instagram' && <Instagram size={12} className="text-pink-500" />}
+                                {item.platform}
+                              </span>
+                              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
+                                {item.category}
+                              </span>
+                            </div>
+                            <h5 className="text-xs sm:text-sm font-bold text-[#1a3a5f] dark:text-gray-100 truncate">
+                              {item.title}
+                            </h5>
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-[11px] text-blue-500 hover:underline truncate block max-w-md"
+                            >
+                              {item.url}
+                            </a>
+                          </div>
+
+                          <div className="flex items-center gap-1 shrink-0">
+                            <button
+                              type="button"
+                              onClick={() => handleEditVideo(item)}
+                              className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteVideo(item.id)}
+                              className="p-1.5 text-xs rounded-lg text-red-500 hover:bg-red-100 dark:hover:bg-red-950/40"
+                              title="Delete video"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}

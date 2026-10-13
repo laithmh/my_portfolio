@@ -5,9 +5,9 @@ import { getPersonalInfo } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
 const highlightIcons = [
-  <Server key="0" size={22} className="text-blue-500" />,
-  <Cpu key="1" size={22} className="text-emerald-500" />,
-  <ShieldCheck key="2" size={22} className="text-purple-500" />
+  <Server key="0" size={22} className="text-blue-600 dark:text-blue-400" />,
+  <Cpu key="1" size={22} className="text-blue-600 dark:text-blue-400" />,
+  <ShieldCheck key="2" size={22} className="text-blue-600 dark:text-blue-400" />
 ];
 
 const About = () => {

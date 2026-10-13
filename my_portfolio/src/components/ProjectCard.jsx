@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Sparkles, ArrowRight, Play, Image as ImageIcon, Download } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, Play, Image as ImageIcon, Download, FolderGit2, Code2 } from 'lucide-react';
 import ProjectImage from './ProjectImage';
 import { resolveAssetPath } from '../utils/assetHelper';
 import { useLanguage } from '../context/LanguageContext';
@@ -30,11 +30,7 @@ const ProjectCard = ({ project, onSelect }) => {
         {/* Project Thumbnail with Fallback */}
         <div className="relative aspect-video overflow-hidden group-hover:opacity-95 transition-opacity">
           {project.mockup === 'dual' && project.secondaryImage ? (
-            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#141a26] to-[#0a0d13] p-3 pt-5 pb-2 relative overflow-hidden select-none flex items-center justify-center">
-              {/* Ambient Glows */}
-              <div className="absolute top-0 left-1/3 w-36 h-36 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-indigo-500/15 rounded-full blur-2xl pointer-events-none" />
-
+            <div className="w-full h-full bg-[#0c1017] p-3 pt-5 pb-2 relative overflow-hidden select-none flex items-center justify-center">
               {/* Responsive Container for Dual Device */}
               <div className="relative w-[95%] h-[92%] flex items-center">
                 {/* Background: Laptop Mockup */}
@@ -74,11 +70,7 @@ const ProjectCard = ({ project, onSelect }) => {
               </div>
             </div>
           ) : project.mockup === 'dual-phone' && project.secondaryImage ? (
-            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#141a26] to-[#0a0d13] flex items-center justify-center gap-3 sm:gap-4 px-4 pt-5 pb-2 relative overflow-hidden select-none">
-              {/* Subtle background glow */}
-              <div className="absolute top-0 left-1/4 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
-
+            <div className="w-full h-full bg-[#0c1017] flex items-center justify-center gap-3 sm:gap-4 px-4 pt-5 pb-2 relative overflow-hidden select-none">
               {/* Phone 1: Dark Mode Phone */}
               <div className="h-[78%] aspect-[9/19.5] rounded-[16px] sm:rounded-[20px] p-1 bg-[#12161f] border border-gray-700/90 shadow-2xl overflow-hidden flex flex-col transform -rotate-2 group-hover:rotate-0 transition-transform duration-300">
                 <div className="w-full h-full rounded-[12px] sm:rounded-[16px] overflow-hidden bg-black">
@@ -104,11 +96,7 @@ const ProjectCard = ({ project, onSelect }) => {
               </div>
             </div>
           ) : (project.mockup === 'tablet-phone' || project.mockup === 'dual-tablet-phone') && project.secondaryImage ? (
-            <div className="w-full h-full bg-gradient-to-br from-[#0c1017] via-[#131924] to-[#0a0d13] p-2 sm:p-3 relative overflow-hidden select-none flex items-center justify-center">
-              {/* Ambient Glows */}
-              <div className="absolute top-0 left-1/3 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute bottom-0 right-1/4 w-28 h-28 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none" />
-
+            <div className="w-full h-full bg-[#0c1017] p-2 sm:p-3 relative overflow-hidden select-none flex items-center justify-center">
               {/* Responsive Container for Tablet + Phone with Balanced Scale */}
               <div className="relative w-[90%] h-[88%] flex items-center">
                 {/* Background: Director Tablet (scaled appropriately) */}
@@ -155,14 +143,14 @@ const ProjectCard = ({ project, onSelect }) => {
 
           {/* First Project Badge or Featured Badge */}
           {project.firstProject ? (
-            <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md z-10">
-              <Sparkles size={11} />
-              First Flutter Project
+            <div className="absolute top-3 left-3 bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-200 border border-amber-500/40 text-[11px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md z-10 backdrop-blur-sm">
+              <Code2 size={12} />
+              <span>First Flutter Project</span>
             </div>
           ) : project.featured ? (
-            <div className="absolute top-3 left-3 bg-[#1a3a5f]/90 dark:bg-blue-600/90 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md z-10">
-              <Sparkles size={12} />
-              Featured
+            <div className="absolute top-3 left-3 bg-[#1a3a5f]/90 dark:bg-blue-600/90 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md z-10">
+              <FolderGit2 size={12} />
+              <span>Featured</span>
             </div>
           ) : null}
 
@@ -199,9 +187,18 @@ const ProjectCard = ({ project, onSelect }) => {
                 />
               </div>
             )}
-            <h3 className="text-xl font-bold text-[#1a3a5f] dark:text-gray-100 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              {project.title || 'Untitled Project'}
-            </h3>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-xl font-bold text-[#1a3a5f] dark:text-gray-100 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {project.title || 'Untitled Project'}
+                </h3>
+                {project.statusBadge && (
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 whitespace-nowrap">
+                    {isRTL && project.statusBadgeAr ? project.statusBadgeAr : project.statusBadge}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 leading-relaxed">
             {project.description || t('modal.emptyDescription', 'Click to view project details and architecture overview.')}

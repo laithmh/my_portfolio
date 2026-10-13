@@ -12,6 +12,8 @@ export default {
   featured: true,
   firstProject: true,
   firstProjectBadge: "First Ever Flutter Project",
+  statusBadge: "First Project • Daily Driver",
+  statusBadgeAr: "أول مشروع • استخدام يومي",
   mockup: "dual-phone",
 
   description: "My first ever Flutter project: a full-featured, offline-first Android music player built from the ground up — featuring a microphone-free 60 FPS audio visualizer via native ExoPlayer PCM tap, in-app ID3 tag editor, and a neumorphic design system across 11 screens.",

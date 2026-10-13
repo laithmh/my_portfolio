@@ -11,6 +11,8 @@ export default {
   order: 2,
   featured: true,
   flagship: false,
+  statusBadge: "Live • Pre-Launch",
+  statusBadgeAr: "مشروع حي • ما قبل الإطلاق",
   mockup: "dual",
 
   description: "A multi-tenant SaaS platform empowering Iraqi Instagram merchants with mobile-first link-in-bio storefronts, frictionless Cash-on-Delivery (COD) checkout, and courier logistics automation.",

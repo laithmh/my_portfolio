@@ -11,6 +11,8 @@ export default {
   order: 3,
   featured: true,
   flagship: false,
+  statusBadge: "Open Source • P2P Tool",
+  statusBadgeAr: "أداة P2P • مفتوح المصدر",
   mockup: "tablet-phone",
 
   description: "An offline peer-to-peer wireless field monitor and smart teleprompter that turns secondary Android tablets into director monitors with sub-20ms glass-to-glass latency over direct Wi-Fi Hotspots—featuring SDP playout delay munging, native Kotlin UDP relay, and on-device voice-activated teleprompter scrolling.",

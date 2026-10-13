@@ -24,7 +24,7 @@ export const LanguageProvider = ({ children }) => {
     document.title =
       language === 'ar'
         ? 'ليث محمد | مهندس منتجات برمجية متكاملة'
-        : 'Laith Muhammad | Full-Stack Product Engineer';
+        : 'Laith Muhammed | Full-Stack Product Engineer';
     try {
       localStorage.setItem('portfolio_lang', language);
     } catch {

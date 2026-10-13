@@ -10,9 +10,11 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
-  Sparkles,
   Award,
-  Download
+  Download,
+  FolderGit2,
+  Code2,
+  FileText
 } from 'lucide-react';
 import ProjectImage from './ProjectImage';
 import { resolveAssetPath } from '../utils/assetHelper';
@@ -117,9 +119,14 @@ const ProjectModal = ({ project, onClose }) => {
                 {category}
               </span>
               {project.firstProject && (
-                <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-sm flex items-center gap-1 flex-shrink-0">
-                  <Sparkles size={12} />
+                <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-200 border border-amber-500/40 shadow-xs flex items-center gap-1.5 flex-shrink-0">
+                  <Code2 size={12} />
                   {project.firstProjectBadge || t('projects.firstProjectBadge', 'First Project')}
+                </span>
+              )}
+              {project.statusBadge && (
+                <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 flex-shrink-0">
+                  {isRTL && project.statusBadgeAr ? project.statusBadgeAr : project.statusBadge}
                 </span>
               )}
               <h2 className="text-base sm:text-2xl font-bold text-[#1a3a5f] dark:text-gray-100 truncate max-w-[130px] sm:max-w-md">
@@ -362,7 +369,7 @@ const ProjectModal = ({ project, onClose }) => {
                     href={project.demoVideoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-indigo-700 transition-colors text-center"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md hover:bg-blue-700 transition-colors text-center"
                   >
                     <Play size={16} />
                     {t('modal.watchVideo', 'Watch Video Walkthrough')}
@@ -381,7 +388,7 @@ const ProjectModal = ({ project, onClose }) => {
 
             {/* Hero Statement */}
             {project.caseStudy?.heroStatement && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-amber-500/10 border-l-4 rtl:border-l-0 rtl:border-r-4 border-amber-500 dark:border-amber-400 text-[#1a3a5f] dark:text-gray-100 font-medium text-sm sm:text-base leading-relaxed italic shadow-sm">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#1a3a5f]/5 dark:bg-white/5 border-l-4 rtl:border-l-0 rtl:border-r-4 border-[#1a3a5f] dark:border-blue-400 text-[#1a3a5f] dark:text-gray-100 font-medium text-sm sm:text-base leading-relaxed italic">
                 "{project.caseStudy.heroStatement}"
               </div>
             )}
@@ -389,7 +396,7 @@ const ProjectModal = ({ project, onClose }) => {
             {/* In-Depth Case Study: Overview */}
             <div>
               <h3 className="text-lg font-bold text-[#1a3a5f] dark:text-gray-100 mb-2 flex items-center gap-2">
-                <Sparkles size={18} className="text-blue-500" />
+                <FileText size={18} className="text-blue-600 dark:text-blue-400" />
                 {t('modal.projectOverview', 'Project Overview')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">

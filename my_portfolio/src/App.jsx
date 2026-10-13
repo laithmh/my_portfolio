@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Story from './components/Story';
+import Skills from './components/Skills';
+import CreativeMedia from './components/CreativeMedia';
+import Experience from './components/Experience';
+import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -38,7 +40,7 @@ const App = () => {
 
   // Track active section on scroll with requestAnimationFrame and bottom-of-page check
   useEffect(() => {
-    const sections = ['home', 'projects', 'skills', 'experience', 'about', 'contact'];
+    const sections = ['home', 'projects', 'story', 'skills', 'videos', 'experience', 'about', 'contact'];
     let ticking = false;
 
     const handleScroll = () => {
@@ -100,16 +102,22 @@ const App = () => {
         {/* 1. Projects Showcase (Proof First) */}
         <Projects />
 
-        {/* 2. Technical Skills Arsenal */}
+        {/* 2. My Story & The Journey (Thinking Process) */}
+        <Story />
+
+        {/* 3. Technical Skills Arsenal */}
         <Skills />
 
-        {/* 3. Career & Experience Milestones */}
+        {/* 4. Creative Media & Video Production */}
+        <CreativeMedia />
+
+        {/* 5. Career & Project Milestones */}
         <Experience />
 
-        {/* 4. Engineering Background & Principles */}
+        {/* 6. Engineering Background & Principles */}
         <About />
 
-        {/* 5. Contact & Outreach */}
+        {/* 7. Contact & Outreach */}
         <Contact />
       </main>
 

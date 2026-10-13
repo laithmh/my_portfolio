@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X, FileDown, Languages } from 'lucide-react';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, getCreativeVideos } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
 const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasVideos, setHasVideos] = useState(() => getCreativeVideos().length > 0);
   const { language, toggleLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setHasVideos(getCreativeVideos().length > 0);
+    };
+    window.addEventListener('portfolio_videos_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('portfolio_videos_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, []);
 
   const navItems = [
     { id: 'home', labelKey: 'nav.home' },
     { id: 'projects', labelKey: 'nav.projects' },
+    { id: 'story', labelKey: 'nav.story' },
     { id: 'skills', labelKey: 'nav.skills' },
+    ...(hasVideos ? [{ id: 'videos', labelKey: 'nav.videos' }] : []),
     { id: 'experience', labelKey: 'nav.experience' },
     { id: 'about', labelKey: 'nav.about' },
     { id: 'contact', labelKey: 'nav.contact' }
@@ -99,7 +114,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href={resumePath}
-              download="Laith_Mohammed_Resume.pdf"
+              download="Laith_Muhammed_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 bg-[#e0e5ec] dark:bg-[#1c222d] text-[#1a3a5f] dark:text-blue-300 px-3 sm:px-4 py-2 rounded-xl text-sm font-semibold shadow-neu-flat-sm dark:shadow-neu-dark-flat-sm hover:shadow-neu-pressed dark:hover:shadow-neu-dark-pressed transition-all"
@@ -176,7 +191,7 @@ const Navbar = ({ activeSection, scrollToSection, isDark, toggleTheme }) => {
 
                   <a
                     href={resumePath}
-                    download="Laith_Mohammed_Resume.pdf"
+                    download="Laith_Muhammed_CV.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
