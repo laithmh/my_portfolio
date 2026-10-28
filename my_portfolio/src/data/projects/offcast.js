@@ -8,7 +8,7 @@ export default {
   title: "OffCast",
   tagline: "Ultra-Low Latency Offline Director Monitor & Smart Teleprompter",
   category: "Flutter",
-  order: 3,
+  order: 4,
   featured: true,
   flagship: false,
   statusBadge: "Open Source • P2P Tool",

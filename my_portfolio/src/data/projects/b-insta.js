@@ -8,7 +8,7 @@ export default {
   title: "B-Insta",
   tagline: "Iraqi Link-in-Bio COD Storefront Platform",
   category: "Full-Stack",
-  order: 2,
+  order: 3,
   featured: true,
   flagship: false,
   statusBadge: "Live • Pre-Launch",

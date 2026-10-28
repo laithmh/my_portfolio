@@ -10,7 +10,7 @@ export const personalInfoData = {
     location: "Available for Remote Roles & Freelance Projects (Baghdad, UTC+3)",
     resumeFile: "Laith_Muhammed_CV.pdf",
     coreFocus: "Flutter • Next.js • Supabase • Founder Mindset",
-    aboutBio: `Self-taught Full-Stack Developer with 4 years of dedicated product building experience. Rather than building tutorial clones, I learn by engineering complete solutions for real challenges: from an offline Android music player (MusicLOTM) to a low-latency P2P director monitor to reframe my own video shoots (OffCast), and from a B2B2C Print-on-Demand marketplace (Solen) to a multi-tenant link-in-bio SaaS (B-Insta) to bootstrap its launch. I combine disciplined full-stack engineering with product intuition and content creation skills (DaVinci Resolve).`,
+    aboutBio: `Self-taught Full-Stack Developer with 4 years of dedicated product building experience. Rather than building tutorial clones, I learn by engineering complete solutions for real challenges: from an offline Android music player (MusicLOTM) to a low-latency P2P director monitor to reframe my own video shoots (OffCast), and from an offline-first commercial retail POS and inflation-protected debt ledger actively used in Syria (Dukkani), to a B2B2C Print-on-Demand marketplace (Solen) and a multi-tenant link-in-bio SaaS (B-Insta). I combine disciplined full-stack engineering with product intuition and content creation skills (DaVinci Resolve).`,
     engineeringPillars: [
       {
         title: "End-to-End Product Ownership",
@@ -38,7 +38,7 @@ export const personalInfoData = {
     location: "متاح للعمل عن بُعد والمشاريع المستقلة (بغداد، توقيت UTC+3)",
     resumeFile: "Laith_Muhammed_CV.pdf",
     coreFocus: "Flutter • Next.js • Supabase • عقلية ريادية",
-    aboutBio: `مطور فل ستاك عصامي يتمتع بـ 4 سنوات من الخبرة العملية في بناء المنتجات الرقمية من الصفر. طريقتي في التعلم تنبع من حل مشكلات حقيقية وبناء أنظمة متكاملة: من مشغل موسيقى أوفلاين للأندرويد (MusicLOTM)، إلى نظام مراقبة وتلقين بدون إنترنت للتصوير الذاتي (OffCast)، وصولاً إلى منصة طباعة عند الطلب للمبدعين (Solen) ومنصة SaaS لمتاجر الروابط (B-Insta) لتمويل المشروع. أجمع بين الكفاءة البرمجية الشاملة، وعقلية بناء المنتجات، ومهارات صناعة المحتوى المرئي بـ DaVinci Resolve.`,
+    aboutBio: `مطور فل ستاك عصامي يتمتع بـ 4 سنوات من الخبرة العملية في بناء المنتجات الرقمية من الصفر. طريقتي في التعلم تنبع من حل مشكلات حقيقية وبناء أنظمة متكاملة: من مشغل موسيقى أوفلاين للأندرويد (MusicLOTM)، إلى نظام مراقبة وتلقين بدون إنترنت للتصوير الذاتي (OffCast)، وصولاً إلى نظام نقاط بيع ومحاسبة ديون أوفلاين يعمل فعلياً لعميل في سوريا (دكّاني)، ومنصة طباعة عند الطلب للمبدعين (Solen) ومنصة متاجر الروابط (B-Insta). أجمع بين الكفاءة البرمجية الشاملة، وعقلية بناء المنتجات، ومهارات صناعة المحتوى المرئي بـ DaVinci Resolve.`,
     engineeringPillars: [
       {
         title: "ملكية شاملة للمنتج البرمجي",
@@ -106,7 +106,9 @@ export const skillTiersData = {
         { name: "BLoC & Reactive State", level: "Strong" },
         { name: "Clean Architecture", level: "Strong" },
         { name: "Flutter WebAssembly (WASM)", level: "Proficient" },
-        { name: "Canvas & Mockup Editors", level: "Proficient" }
+        { name: "Canvas & Mockup Editors", level: "Proficient" },
+        { name: "Drift (SQLite) & Offline-First DB", level: "Strong" },
+        { name: "Financial Math & Ed25519 Cryptography", level: "Strong" }
       ]
     },
     {
@@ -156,7 +158,9 @@ export const skillTiersData = {
         { name: "BLoC & Reactive State", level: "متمكن" },
         { name: "Clean Architecture", level: "متمكن" },
         { name: "Flutter WebAssembly (WASM)", level: "متقدم" },
-        { name: "Canvas & Mockup Editors", level: "متقدم" }
+        { name: "Canvas & Mockup Editors", level: "متقدم" },
+        { name: "Drift (SQLite) وقواعد بيانات الأوفلاين", level: "متمكن" },
+        { name: "الحسابات المالية والتشفير (Ed25519 / AES)", level: "متمكن" }
       ]
     },
     {
@@ -189,6 +193,13 @@ export const skillTiersData = {
 export const experienceTimelineData = {
   en: [
     {
+      period: "2026",
+      role: "Principal Mobile Architect & Flutter Engineer",
+      company: "Dukkani (دكّاني) — Commercial Retail POS & Debt Ledger",
+      badge: "Commercial Client in Syria • Active in Production",
+      description: "Architected and shipped a 100% offline-first Point of Sale, inventory system, and USD-pegged customer debt ledger for a retail merchant client in Syria actively using it in daily store operations. Engineered with Flutter, strict BLoC Clean Architecture, Drift SQLite with 4 native immutability triggers, arbitrary-precision Decimal math, 10/25/50 SYP banknote denomination snapping, Ed25519 offline hardware licensing, and 44 automated test suites."
+    },
+    {
       period: "2024 - Present",
       role: "Founder & Full-Stack Developer",
       company: "Solen (سولين) — POD & Creator Marketplace",
@@ -218,6 +229,13 @@ export const experienceTimelineData = {
     }
   ],
   ar: [
+    {
+      period: "2026",
+      role: "مهندس معمارية تطبيقات فلاتر ومطور رئيسي",
+      company: "دكّاني (Dukkani) — نظام نقاط بيع تجاري ومحاسبة ديون أوفلاين",
+      badge: "مشروع لعميل تجاري في سوريا • يعمل فعلياً في الإنتاج",
+      description: "تصميم وبناء نظام تجاري متكامل لنقاط البيع وإدارة المخزون ودفتر ديون العملاء المحمي بالدولار لعميل تجاري في سوريا يعتمد عليه يومياً في إدارة متجره. طُوّر بفلاتر ومعمارية BLoC الصارمة، وقاعدة بيانات Drift SQLite مدعومة بـ 4 محفزات أمان لمحاربة التلاعب المحاسبي، وحسابات دقيقة بـ Decimal، وتقريب ذكي لفئات العملة السورية، وترخيص أوفلاين مشفر بـ Ed25519، و44 حزمة فحص آلي."
+    },
     {
       period: "2024 - حتى الآن",
       role: "المؤسس ومطور فل ستاك",
@@ -298,7 +316,15 @@ export const storyMilestonesData = {
       content: "Recognizing that building products is only half the battle, I decided to master content creation. I started with CapCut on mobile, then leveled up to DaVinci Resolve on desktop — mastering node-based color grading, audio synchronization, motion design, and cinematic filming using just my phone. This creative edge allows me to produce commercial-grade visual assets and demo videos for my own software.",
       icon: "film",
       tag: "Creative Edge"
-    }
+    },
+    {
+      year: "2026",
+      title: "Commercial Retail in Syria: Dukkani Offline-First POS",
+      tagline: "Solving volatile inflation, coin shortages, and paper debt notebooks for an active retail client.",
+      content: "A neighborhood grocery merchant in Syria needed a modern POS that could survive daily reality: rolling power blackouts, erratic internet, rapid currency devaluation, and customers asking for small change in physical banknotes that no longer exist. I engineered Dukkani from the ground up: an offline-first system storing wholesale costs in Decimal USD, instantly re-pricing shelves via a pinned exchange rate bar, snapping cash totals to physical banknote combinations (10/25/50 SYP), and replacing fragile paper debt notebooks with an append-only ledger protected by 4 native SQLite database triggers. Secured with asymmetric Ed25519 offline hardware licensing, the client uses it daily in commercial production.",
+      icon: "store",
+      tag: "Production Client System"
+    },
   ],
   ar: [
     {
@@ -348,7 +374,15 @@ export const storyMilestonesData = {
       content: "إدراكاً مني بأن برمجة المنتج ليست سوى نصف المعركة، قررت احتراف صناعة المحتوى. بدأت بتطبيق CapCut على الهاتف، ثم ارتقيت إلى DaVinci Resolve على الحاسوب — وأتقنت تلوين الفيديو بنظام العقد (Nodes)، والمؤثرات الحركية (Motion Graphics)، والتصوير السينمائي بالهاتف. تمنحني هذه المهارة ميزة لإنتاج فيديوهات ترويجية تجارية وعروض تفاعلية لبرمجياتي بنفسي.",
       icon: "film",
       tag: "الجانب الإبداعي"
-    }
+    },
+    {
+      year: "2026",
+      title: "أنظمة التجارة والتجزئة في سوريا: دكّاني لنقاط البيع والمحاسبة",
+      tagline: "تذليل عقبات التضخم وأزمة الفكة ودفاتر الديون الورقية لعميل تجاري نشط.",
+      content: "احتاج تاجر بقالية في سوريا لنظام نقاط بيع حديث يتوافق مع ظروف السوق القاسية: انقطاع الكهرباء والإنترنت، والهبوط المستمر للعملة، وأزمة الفكة اليومية مع غياب العملات المعدنية. قمت بهندسة دكّاني من الصفر: نظام يعمل أوفلاين 100% يربط الأسعار بالدولار عبر Decimal، ويعيد تسعير الرفوف بلمسة واحدة، ويقرب فواتير الكاش للفئات النقدية المتاحة (10 و25 و50 ل.س)، ويستبدل دفاتر الديون الورقية المعرضة للضياع بسجل إلحاقي محمي بـ 4 محفزات أمان في SQLite، مع ترخيص عتادي مشفر بـ Ed25519. النظام يعمل بنجاح واعتمادية يومية لدى العميل.",
+      icon: "store",
+      tag: "نظام إنتاجي لعميل"
+    },
   ]
 };
 

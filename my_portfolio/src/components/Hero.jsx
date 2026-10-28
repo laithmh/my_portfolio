@@ -35,6 +35,7 @@ const Hero = ({ scrollToSection }) => {
     "Flutter",
     "Flutter WASM",
     "Dart",
+    "Drift (SQLite)",
     "Supabase",
     "PostgreSQL",
     "Tailwind CSS"

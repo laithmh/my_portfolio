@@ -8,7 +8,7 @@ export default {
   title: "MusicLotm",
   tagline: "First-Ever Flutter Project • Offline Android Music Player & Native DSP Visualizer",
   category: "Flutter",
-  order: 4,
+  order: 5,
   featured: true,
   firstProject: true,
   firstProjectBadge: "First Ever Flutter Project",
